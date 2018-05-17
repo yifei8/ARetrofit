@@ -1,0 +1,17 @@
+apply plugin: 'java'
+
+ext {
+    bintrayName = 'auto-annotation'
+    artifact = bintrayName
+    libraryName = 'auto annotation contract'
+    libraryDescription = 'A lib for autoannotation'
+    libraryVersion = auto_annotation_version
+    localRepo = '../repo-annotation'
+}
+
+dependencies {
+    implementation gradleApi()
+    implementation localGroovy()
+}
+
+apply from: '../bintray.gradle'

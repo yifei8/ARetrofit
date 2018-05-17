@@ -1,0 +1,32 @@
+if (!debug_repo) {
+    apply from: '/bintrayv1.gradle'
+    apply from: '/installv1.gradle'
+} else {
+    apply plugin: 'maven'
+    apply plugin: 'com.jfrog.bintray'
+
+    repositories {
+        mavenCentral()
+    }
+
+    if (project.hasProperty("android")) { // Android libraries
+
+    } else {
+        dependencies {
+            implementation gradleApi()
+            implementation localGroovy()
+        }
+    }
+
+    group = publishedGroupId
+    version = auto_inject_version
+
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                //本地的Maven地址设置为../repo
+                repository(url: uri(localRepo))
+            }
+        }
+    }
+}

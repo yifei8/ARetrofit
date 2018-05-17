@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.sjtu.yifei.test_module1">
+
+    <application>
+        <activity
+            android:name=".Test1Activity"
+            android:label="@string/title_activity_test1"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+    </application>
+
+</manifest>

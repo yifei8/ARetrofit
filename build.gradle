@@ -1,0 +1,69 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+
+    repositories {
+        if (!debug_repo) {
+            maven {
+                //一般 Add to JCenter会有审核延迟, 此时还没有添加到Jcenter中
+                //在未审核通过之前，可以这样使用自己的maven仓库：
+                url 'https://dl.bintray.com/iyifei/maven/'
+            }
+        } else {
+            maven{ url rootProject.file("repo-api") }
+            maven{ url rootProject.file("repo-annotation") }
+            maven{ url rootProject.file("repo-inject") }
+            maven{ url rootProject.file("repo-complier") }
+            maven {
+                //一般 Add to JCenter会有审核延迟, 此时还没有添加到Jcenter中
+                //在未审核通过之前，可以这样使用自己的maven仓库：
+                url 'https://dl.bintray.com/iyifei/maven/'
+            }
+        }
+
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.2'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
+        classpath "com.sjtu.yifei:auto-inject:${auto_inject_version}"
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        if (!debug_repo) {
+            maven {
+                //一般 Add to JCenter会有审核延迟, 此时还没有添加到Jcenter中
+                //在未审核通过之前，可以这样使用自己的maven仓库：
+                url 'https://dl.bintray.com/iyifei/maven/'
+            }
+        } else {
+            maven{ url rootProject.file("repo-api") }
+            maven{ url rootProject.file("repo-annotation") }
+            maven{ url rootProject.file("repo-inject") }
+            maven{ url rootProject.file("repo-complier") }
+            maven {
+                //一般 Add to JCenter会有审核延迟, 此时还没有添加到Jcenter中
+                //在未审核通过之前，可以这样使用自己的maven仓库：
+                url 'https://dl.bintray.com/iyifei/maven/'
+            }
+        }
+        google()
+        jcenter()
+    }
+
+    tasks.withType(Javadoc) {
+        options.addStringOption('Xdoclint:none', '-quiet')
+        options.addStringOption('encoding', 'UTF-8')
+        options.addStringOption('charSet', 'UTF-8')
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

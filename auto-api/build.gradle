@@ -1,0 +1,39 @@
+apply plugin: 'com.android.library'
+
+ext {
+    bintrayName = 'arouter-api'
+    artifact = bintrayName
+    libraryName = 'ARouter sdk'
+    libraryDescription = 'A router for android'
+    libraryVersion = auto_api_version
+    localRepo = '../repo-api'
+}
+
+android {
+    compileSdkVersion Integer.parseInt(COMPILE_SDK_VERSION)
+    buildToolsVersion BUILDTOOLS_VERSION
+
+    defaultConfig {
+        minSdkVersion Integer.parseInt(MIN_SDK_VERSION)
+        targetSdkVersion Integer.parseInt(TARGET_SDK_VERSION)
+    }
+
+    buildTypes {
+        release {
+            debuggable false
+            minifyEnabled false
+        }
+
+        lintOptions { abortOnError false }
+    }
+}
+
+dependencies {
+    annotationProcessor "com.sjtu.yifei:auto-complier:${auto_complier_version}"
+    api "com.sjtu.yifei:auto-annotation:${auto_annotation_version}"
+//    api "com.sjtu.yifei:auto-complier:${auto_complier_version}"
+
+    api "com.android.support:support-v4:${SUPPORT_LIB_VERSION}"
+}
+
+apply from: '../bintray.gradle'

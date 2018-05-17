@@ -1,0 +1,1 @@
+include ':app', ':auto-inject', ':auto-complier', ':test-module1', ':test-module2', ':common-module', ':auto-annotation', ':auto-api'

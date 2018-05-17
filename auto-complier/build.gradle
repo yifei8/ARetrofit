@@ -1,0 +1,32 @@
+apply plugin: 'java'
+
+ext {
+    bintrayName = 'auto-complier'
+    artifact = bintrayName
+    libraryName = 'auto inject contract'
+    libraryDescription = 'A lib for autoinject to find contract'
+    libraryVersion = auto_complier_version
+    localRepo = '../repo-complier'
+}
+
+dependencies {
+    implementation gradleApi()
+    implementation localGroovy()
+
+    compile "com.sjtu.yifei:auto-annotation:${auto_annotation_version}"
+//    compile project(":auto-annotation")
+    // auto-service库可以帮我们去生成META-INF等信息。
+    compile 'com.google.auto.service:auto-service:1.0-rc4'
+
+    // A Java API for generating .java source files.
+    compile 'com.squareup:javapoet:1.11.0'
+
+    compile 'org.apache.commons:commons-lang3:3.4'
+    compile 'org.apache.commons:commons-collections4:4.1'
+
+    // 如果找不到javax包，可以直接引入本地jdk的jar包
+    compile files ('/Library/Java/JavaVirtualMachines/jdk1.8.0_141.jdk/Contents/Home/jre/lib/rt.jar')
+}
+
+apply from: '../bintray.gradle'
+

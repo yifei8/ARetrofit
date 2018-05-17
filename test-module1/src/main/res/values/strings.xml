@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">test-module1</string>
+    <string name="title_activity_test1">Test1Activity</string>
+</resources>
