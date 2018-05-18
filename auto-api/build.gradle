@@ -29,8 +29,8 @@ android {
 }
 
 dependencies {
-    annotationProcessor "com.sjtu.yifei:auto-complier:${auto_complier_version}"
-    api "com.sjtu.yifei:auto-annotation:${auto_annotation_version}"
+    annotationProcessor "com.sjtu.yifei:auto-complier:${rootProject.ext.auto_complier}"
+    api "com.sjtu.yifei:auto-annotation:${rootProject.ext.auto_annotation}"
 //    api "com.sjtu.yifei:auto-complier:${auto_complier_version}"
 
     api "com.android.support:support-v4:${SUPPORT_LIB_VERSION}"

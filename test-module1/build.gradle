@@ -27,7 +27,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     api project(':common-module')
 
-    annotationProcessor "com.sjtu.yifei:auto-complier:${auto_complier_version}"
+    annotationProcessor "com.sjtu.yifei:auto-complier:${rootProject.ext.auto_complier}"
 //    annotationProcessor project(':auto-complier')
 
     testImplementation 'junit:junit:4.12'

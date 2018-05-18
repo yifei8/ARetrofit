@@ -19,7 +19,7 @@ if (!debug_repo) {
     }
 
     group = publishedGroupId
-    version = auto_inject_version
+    version = libraryVersion
 
     uploadArchives {
         repositories {

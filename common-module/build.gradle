@@ -27,8 +27,8 @@ dependencies {
     api 'com.android.support.constraint:constraint-layout:1.1.0'
     api 'com.android.support:multidex:1.0.3'
 
-    annotationProcessor "com.sjtu.yifei:auto-complier:${auto_complier_version}"
-    api "com.sjtu.yifei:auto-api:${auto_api_version}"
+    annotationProcessor "com.sjtu.yifei:auto-complier:${rootProject.ext.auto_complier}"
+    api "com.sjtu.yifei:auto-api:${rootProject.ext.auto_api}"
 //        annotationProcessor project(':auto-complier')
 //        api project(':auto-api')
 
