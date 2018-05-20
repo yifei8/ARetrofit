@@ -16,11 +16,11 @@ import com.sjtu.yifei.annotation.RequestCode;
 public interface RouteService {
 
     @Go("/test-module1/Test1Activity")
-    String launchTest1Activity(@Extra("para1") String para1, @Extra("para2") int para2);
+    boolean launchTest1Activity(@Extra("para1") String para1, @Extra("para2") int para2);
 
     @Go("/test-module1/Test1Activity")
-    String launchTest1ActivityForResult(@Extra("para1") String para1, @Extra("para2") int para2, @RequestCode int requestCode);
+    boolean launchTest1ActivityForResult(@Extra("para1") String para1, @Extra("para2") int para2, @RequestCode int requestCode);
 
     @Go("/test-module2/Test2Activity")
-    String launchTest2Activity(@Extra("para1") String para1, @Extra("para2") int para2);
+    boolean launchTest2Activity(@Extra("para1") String para1, @Extra("para2") int para2);
 }

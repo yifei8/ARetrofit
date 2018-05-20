@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.sjtu.yifei</groupId>
   <artifactId>auto-inject</artifactId>
-  <version>0.0.1</version>
+  <version>0.0.2</version>
   <dependencies>
     <dependency>
       <groupId>com.android.tools.build</groupId>

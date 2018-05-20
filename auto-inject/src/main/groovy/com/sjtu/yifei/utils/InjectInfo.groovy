@@ -24,4 +24,11 @@ class InjectInfo {
     static InjectInfo get() {
         return info
     }
+
+    void retEnv() {
+        injectClasses.clear()
+        injectToClass = null
+        injectToClassName = null
+        injectToMethodName = null
+    }
 }

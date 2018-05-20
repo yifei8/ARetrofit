@@ -4,13 +4,13 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.sjtu.yifei</groupId>
   <artifactId>auto-api</artifactId>
-  <version>0.0.1</version>
+  <version>0.0.2</version>
   <packaging>aar</packaging>
   <dependencies>
     <dependency>
       <groupId>com.sjtu.yifei</groupId>
       <artifactId>auto-annotation</artifactId>
-      <version>0.0.1</version>
+      <version>0.0.2</version>
       <scope>compile</scope>
     </dependency>
     <dependency>

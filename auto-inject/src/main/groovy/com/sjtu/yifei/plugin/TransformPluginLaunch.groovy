@@ -79,6 +79,7 @@ class TransformPluginLaunch extends Transform implements Plugin<Project> {
     void transform(TransformInvocation transformInvocation) throws TransformException, InterruptedException, IOException {
         super.transform(transformInvocation)
         Log.i(NAME, "========== Transform scan start ===========")
+        InjectInfo.get().retEnv()
         def startTime = System.currentTimeMillis()
 
         //todo step1: 先扫描
