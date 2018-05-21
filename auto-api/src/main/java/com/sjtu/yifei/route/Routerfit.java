@@ -37,11 +37,11 @@ public final class Routerfit {
                     return method.invoke(this, args);
                 }
                 ServiceMethod<Object> serviceMethod = (ServiceMethod<Object>) loadServiceMethod(method, args);
-                if (isSpecificClass(serviceMethod.clazz, Activity.class)) {
+                if (Utils.isSpecificClass(serviceMethod.clazz, Activity.class)) {
                     Call<T> call = new ActivityCall<>(serviceMethod);
                     return call.execute();
-                } else if (isSpecificClass(serviceMethod.clazz, Fragment.class)
-                        || isSpecificClass(serviceMethod.clazz, android.app.Fragment.class)) {
+                } else if (Utils.isSpecificClass(serviceMethod.clazz, Fragment.class)
+                        || Utils.isSpecificClass(serviceMethod.clazz, android.app.Fragment.class)) {
                     Call<T> call = new FragmentCall<>(serviceMethod);
                     return call.execute();
                 }
@@ -50,15 +50,7 @@ public final class Routerfit {
         });
     }
 
-    private boolean isSpecificClass(Class clazz, Class youSpecific) {
-        while (clazz != Object.class) {
-            if (clazz == youSpecific) {
-                return true;
-            }
-            clazz = clazz.getSuperclass();
-        }
-        return false;
-    }
+
 
     private ServiceMethod<?> loadServiceMethod(Method method, Object[] args) throws ClassNotFoundException {
         ServiceMethod<?> result = serviceMethodCache.get(method);

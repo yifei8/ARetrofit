@@ -7,7 +7,9 @@
             android:name=".Test1Activity"
             android:label="@string/title_activity_test1"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".FragmentActivity"></activity>
+        <activity android:name=".FragmentActivity"
+            android:label="@string/title_activity_fragment"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

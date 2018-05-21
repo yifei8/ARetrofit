@@ -216,4 +216,14 @@ public class Utils {
         }
     }
 
+    public static boolean isSpecificClass(Class clazz, Class youSpecific) {
+        while (clazz != Object.class) {
+            if (clazz == youSpecific) {
+                return true;
+            }
+            clazz = clazz.getSuperclass();
+        }
+        return false;
+    }
+
 }
