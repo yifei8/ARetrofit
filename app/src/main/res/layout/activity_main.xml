@@ -30,4 +30,12 @@
         android:gravity="center"
         android:text="launch Test2Activity which in module(test-module2) " />
 
+    <TextView
+        android:id="@+id/tv_fragment"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
+        android:text="launch FragmentActivity" />
+
 </LinearLayout>

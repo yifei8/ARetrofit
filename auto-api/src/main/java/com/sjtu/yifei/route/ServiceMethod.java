@@ -1,7 +1,6 @@
 package com.sjtu.yifei.route;
 
 import android.text.TextUtils;
-import android.util.ArrayMap;
 
 import com.sjtu.yifei.annotation.Extra;
 import com.sjtu.yifei.annotation.Go;
@@ -74,7 +73,6 @@ final class ServiceMethod<T> {
 
             params = new HashMap<>();
             Annotation[][] parameterAnnotations = method.getParameterAnnotations();
-            int requestCode = -1;
             for (int i = 0; i < parameterAnnotations.length; i++) {
                 Annotation[] annotations = parameterAnnotations[i];
                 if (annotations != null) {

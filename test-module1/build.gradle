@@ -27,6 +27,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     api project(':common-module')
 
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     annotationProcessor "com.sjtu.yifei:auto-complier:${rootProject.ext.auto_complier}"
 //    annotationProcessor project(':auto-complier')
 
