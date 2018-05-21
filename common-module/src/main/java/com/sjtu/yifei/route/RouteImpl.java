@@ -1,6 +1,7 @@
 package com.sjtu.yifei.route;
 
 import android.content.Context;
+import android.support.v4.app.Fragment;
 
 import com.sjtu.yifei.launcher.RetrofitConfig;
 
@@ -47,11 +48,20 @@ public class RouteImpl {
     public static void launchTest1Activity(String para1, int para2) {
         RouteImpl.getInstance().create().launchTest1Activity(para1, para2);
     }
+
+    public static void launchFragmentActivity() {
+        RouteImpl.getInstance().create().launchFragmentActivity();
+    }
+
     public static void launchTest1ActivityForResult(String para1, int para2, int requestCode) {
         RouteImpl.getInstance().create().launchTest1ActivityForResult(para1, para2, requestCode);
     }
 
     public static void launchTest2Activity(String para1, int para2) {
         RouteImpl.getInstance().create().launchTest2Activity(para1, para2);
+    }
+
+    public static Fragment getTestFragment(String para1, String para2) {
+        return RouteImpl.getInstance().create().getTestFragment(para1, para2);
     }
 }

@@ -1,7 +1,6 @@
 package com.sjtu.yifei.route;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 
 import com.sjtu.yifei.util.Utils;
@@ -10,62 +9,24 @@ import java.io.Serializable;
 import java.util.Map;
 
 /**
- * 类描述：通过路由进行Activity组件之间的跳转
- * 创建人：yifei
- * 创建时间：2018/5/15
- * 修改人：
- * 修改时间：
- * 修改备注：
+ * [description]
+ * author: yifei
+ * created at 18/5/20 下午8:57
  */
 
-public class ActivityCall {
+public class ActivityCall<T> implements Call {
+    private final ServiceMethod<T> serviceMethod;
 
-    private ActivityCall() {
+    public ActivityCall(ServiceMethod<T> serviceMethod) {
+        this.serviceMethod = serviceMethod;
     }
 
-    private ActivityCall(Class activity, Map<String, Object> params, int requestCode) {
-        this.activity = activity;
-        this.params = params;
-        this.requestCode = requestCode;
-    }
-
-    private Class activity;
-    private Map<String, Object> params;
-    private int requestCode;
-
-    public static final class Builder {
-        private Class activity;
-        private Map<String, Object> params;
-        private int requestCode;
-
-        public Builder() {
-        }
-
-        public Builder activityClass(Class activity) {
-            this.activity = activity;
-            return this;
-        }
-
-        public Builder params(Map<String, Object> params) {
-            this.params = params;
-            return this;
-        }
-
-        public Builder requestCode(int requestCode) {
-            this.requestCode = requestCode;
-            return this;
-        }
-
-        public ActivityCall build() {
-            return new ActivityCall(activity, params, requestCode);
-        }
-    }
-
-    public void launch() {
+    @Override
+    public Object execute() {
         Activity activity = Utils.getTopActivity();
         if (activity != null) {
-            Intent intent = new Intent(activity, this.activity);
-            for (Map.Entry<String, Object> entry : params.entrySet()) {
+            Intent intent = new Intent(activity, serviceMethod.clazz);
+            for (Map.Entry<String, Object> entry : serviceMethod.params.entrySet()) {
                 String key = entry.getKey();
                 Object val = entry.getValue();
                 if (val instanceof Integer) {
@@ -88,11 +49,12 @@ public class ActivityCall {
                     intent.putExtra(key, (Serializable) val);
                 }
             }
-            if (requestCode > 0) {
-                activity.startActivityForResult(intent, requestCode);
+            if (serviceMethod.requestCode > 0) {
+                activity.startActivityForResult(intent, serviceMethod.requestCode);
             } else {
                 activity.startActivity(intent);
             }
         }
+        return true;
     }
 }

@@ -1,5 +1,7 @@
 package com.sjtu.yifei.route;
 
+import android.support.v4.app.Fragment;
+
 import com.sjtu.yifei.annotation.Extra;
 import com.sjtu.yifei.annotation.Go;
 import com.sjtu.yifei.annotation.RequestCode;
@@ -16,11 +18,19 @@ import com.sjtu.yifei.annotation.RequestCode;
 public interface RouteService {
 
     @Go("/test-module1/Test1Activity")
-    String launchTest1Activity(@Extra("para1") String para1, @Extra("para2") int para2);
+    boolean launchTest1Activity(@Extra("para1") String para1, @Extra("para2") int para2);
+
+    @Go("/test-module1/FragmentActivity")
+    boolean launchFragmentActivity();
 
     @Go("/test-module1/Test1Activity")
-    String launchTest1ActivityForResult(@Extra("para1") String para1, @Extra("para2") int para2, @RequestCode int requestCode);
+    boolean launchTest1ActivityForResult(@Extra("para1") String para1, @Extra("para2") int para2, @RequestCode int requestCode);
 
     @Go("/test-module2/Test2Activity")
-    String launchTest2Activity(@Extra("para1") String para1, @Extra("para2") int para2);
+    boolean launchTest2Activity(@Extra("para1") String para1, @Extra("para2") int para2);
+
+    @Go("/test-module2/TestFragment")
+    Fragment getTestFragment(@Extra("param1") String para1, @Extra("param2") String para2);
+
+
 }

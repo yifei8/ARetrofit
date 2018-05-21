@@ -3,10 +3,11 @@
   <groupId>com.sjtu.yifei</groupId>
   <artifactId>auto-inject</artifactId>
   <versioning>
-    <release>0.0.1</release>
+    <release>0.0.2</release>
     <versions>
       <version>0.0.1</version>
+      <version>0.0.2</version>
     </versions>
-    <lastUpdated>20180517073826</lastUpdated>
+    <lastUpdated>20180521142544</lastUpdated>
   </versioning>
 </metadata>
