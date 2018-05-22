@@ -26,8 +26,9 @@ public class Test2Activity extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent != null) {
             String para1 = intent.getStringExtra("para1");
-            int para2 = intent.getIntExtra("para2", -1);
-            Log.e(TAG, "para1:" + para1 + ",para2:" + para2);
+//            int para2 = intent.getIntExtra("para2", -1);
+            int[] para2 = intent.getIntArrayExtra("para2");
+            Log.e(TAG, "para1:" + para1 + ",para2:" + para2[0] + ", " + para2[1]);
         }
 
 
