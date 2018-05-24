@@ -16,17 +16,20 @@ import java.util.Map;
  * created at 18/5/20 下午8:57
  */
 
-public class ActivityCall<T> implements Call {
-    private final ServiceMethod<T> serviceMethod;
+public class ActivityCall<T> implements Call<T> {
+    private final ServiceMethod<Object> serviceMethod;
 
-    public ActivityCall(ServiceMethod<T> serviceMethod) {
+    public ActivityCall(ServiceMethod<Object> serviceMethod) {
         this.serviceMethod = serviceMethod;
     }
 
     @Override
-    public Object execute() {
+    public T execute() {
+        if (serviceMethod.clazz == null) {
+            return null;
+        }
         Activity activity = Utils.getTopActivity();
-        if (activity != null && serviceMethod.clazz != null) {
+        if (activity != null) {
             Intent intent = new Intent(activity, serviceMethod.clazz);
             for (Map.Entry<String, Object> entry : serviceMethod.params.entrySet()) {
                 String key = entry.getKey();
@@ -51,7 +54,7 @@ public class ActivityCall<T> implements Call {
                     intent.putExtra(key, (Serializable) val);
                 } else if (val instanceof Parcelable) {
                     intent.putExtra(key, (Parcelable) val);
-                } else  if (val instanceof CharSequence) {
+                } else if (val instanceof CharSequence) {
                     intent.putExtra(key, (CharSequence) val);
                 } else if (val instanceof Integer[]) {
                     intent.putExtra(key, (Integer[]) val);
@@ -90,6 +93,6 @@ public class ActivityCall<T> implements Call {
                 activity.startActivity(intent);
             }
         }
-        return true;
+        return (T) Boolean.valueOf(true);
     }
 }

@@ -64,4 +64,12 @@ public class RouteImpl {
     public static Fragment getTestFragment(String para1, String para2) {
         return RouteImpl.getInstance().create().getTestFragment(para1, para2);
     }
+
+    public static IProvider getTest1Modul1IProvider(String para1, int para2) {
+        return RouteImpl.getInstance().create().getTest1Modul1IProvider(para1, para2);
+    }
+
+    public static IProvider getTest2Modul2IProvider(String para1, String para2) {
+        return RouteImpl.getInstance().create().getTest2Modul2IProvider(para1, para2);
+    }
 }

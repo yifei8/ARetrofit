@@ -14,16 +14,19 @@ import java.util.Map;
  * created at 18/5/20 下午8:57
  */
 
-public class FragmentCall<T> implements Call {
-    private final ServiceMethod<T> serviceMethod;
+public class FragmentCall implements Call {
+    private final ServiceMethod<Object> serviceMethod;
 
-    public FragmentCall(ServiceMethod<T> serviceMethod) {
+    public FragmentCall(ServiceMethod<Object> serviceMethod) {
         this.serviceMethod = serviceMethod;
     }
 
     @Override
     public Object execute() {
         try {
+            if (serviceMethod.clazz == null) {
+                return null;
+            }
             if (Utils.isSpecificClass(serviceMethod.clazz, Fragment.class)) {
                 Fragment fragment = (Fragment) serviceMethod.clazz.newInstance();
                 Bundle bundle = new Bundle();
