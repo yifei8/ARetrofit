@@ -3,7 +3,7 @@ apply plugin: 'com.android.library'
 ext {
     bintrayName = 'auto-api'
     artifact = bintrayName
-    libraryName = 'ARouter sdk'
+    libraryName = 'auto-api'
     libraryDescription = 'A router for android'
     libraryVersion = auto_api_version
     localRepo = '../repo-api'
@@ -29,14 +29,12 @@ android {
 }
 
 dependencies {
-//    annotationProcessor "com.sjtu.yifei:auto-complier:${rootProject.ext.auto_complier}"
-    api "com.sjtu.yifei:auto-annotation:${rootProject.ext.auto_annotation}"
-//    compile project(':auto-annotation')
-
-    api "com.android.support:support-v4:${SUPPORT_LIB_VERSION}"
+    annotationProcessor "com.sjtu.yifei:auto-complier:${rootProject.ext.auto_complier}"
+    compile "com.sjtu.yifei:auto-annotation:${rootProject.ext.auto_annotation}"
+    compile "com.android.support:support-v4:${SUPPORT_LIB_VERSION}"
 }
 
-apply from: '../bintrayv1.gradle'
-apply from: '../installv1.gradle'
+//apply from: '../bintrayv1.gradle'
+//apply from: '../installv1.gradle'
 
 //apply from: '../bintray.gradle'

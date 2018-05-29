@@ -13,11 +13,11 @@ dependencies {
     implementation gradleApi()
     implementation localGroovy()
 
-    implementation 'com.android.tools.build:gradle:3.0.1'
+    compile 'com.android.tools.build:gradle:3.0.1'
     //transform
-    implementation 'com.android.tools.build:transform-api:1.5.0'
+    compile 'com.android.tools.build:transform-api:1.5.0'
     //开源 io 操作
-    implementation 'commons-io:commons-io:2.4'
+    compile 'commons-io:commons-io:2.4'
 }
 
 //apply from: '../bintrayv1.gradle'
