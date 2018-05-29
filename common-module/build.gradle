@@ -29,8 +29,6 @@ dependencies {
 
     annotationProcessor "com.sjtu.yifei:auto-complier:${rootProject.ext.auto_complier}"
     api "com.sjtu.yifei:auto-api:${rootProject.ext.auto_api}"
-//        annotationProcessor project(':auto-complier')
-//        api project(':auto-api')
 
 //    api 'com.blankj:utilcode:1.14.1'
 }

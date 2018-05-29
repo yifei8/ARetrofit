@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 
 ext {
-    bintrayName = 'arouter-api'
+    bintrayName = 'auto-api'
     artifact = bintrayName
     libraryName = 'ARouter sdk'
     libraryDescription = 'A router for android'
@@ -29,9 +29,9 @@ android {
 }
 
 dependencies {
-    annotationProcessor "com.sjtu.yifei:auto-complier:${rootProject.ext.auto_complier}"
+//    annotationProcessor "com.sjtu.yifei:auto-complier:${rootProject.ext.auto_complier}"
     api "com.sjtu.yifei:auto-annotation:${rootProject.ext.auto_annotation}"
-//    api "com.sjtu.yifei:auto-complier:${auto_complier_version}"
+//    compile project(':auto-annotation')
 
     api "com.android.support:support-v4:${SUPPORT_LIB_VERSION}"
 }
