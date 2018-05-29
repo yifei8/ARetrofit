@@ -28,5 +28,8 @@ dependencies {
     compile files ('/Library/Java/JavaVirtualMachines/jdk1.8.0_141.jdk/Contents/Home/jre/lib/rt.jar')
 }
 
-apply from: '../bintray.gradle'
+apply from: '../bintrayv1.gradle'
+apply from: '../installv1.gradle'
+
+//apply from: '../bintray.gradle'
 
