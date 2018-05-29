@@ -22,9 +22,14 @@ public class MainActivity extends AppCompatActivity {
         TextView tv_test2 = findViewById(R.id.tv_test2);
         TextView tv_test1_for_result = findViewById(R.id.tv_test1_for_result);
         TextView tv_fragment = findViewById(R.id.tv_fragment);
+        int[] i = new int[3];
+        i[0]=1;
+        i[1]=2;
+        i[2]=3;
+
         tv_test1.setOnClickListener(v -> RouteImpl.launchTest1Activity("xxx1", 100));
         tv_test1_for_result.setOnClickListener(v -> RouteImpl.launchTest1ActivityForResult("xxx1", 100, REQUEST_CODE_TEST1));
-        tv_test2.setOnClickListener(v -> RouteImpl.launchTest2Activity("xxxx2", 5000));
+        tv_test2.setOnClickListener(v -> RouteImpl.launchTest2Activity("xxxx2", i));
         tv_fragment.setOnClickListener(v -> RouteImpl.launchFragmentActivity());
 
     }

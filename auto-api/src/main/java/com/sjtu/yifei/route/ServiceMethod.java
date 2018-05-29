@@ -3,6 +3,7 @@ package com.sjtu.yifei.route;
 import android.text.TextUtils;
 
 import com.sjtu.yifei.annotation.Extra;
+import com.sjtu.yifei.annotation.Flags;
 import com.sjtu.yifei.annotation.Go;
 import com.sjtu.yifei.annotation.RequestCode;
 
@@ -22,17 +23,23 @@ final class ServiceMethod<T> {
 
     final Class clazz;
     final Map<String, Object> params;
+    final int flag;
     final int requestCode;
+    final Type returnType;
 
     ServiceMethod(Builder<T> builder) {
         this.clazz = builder.clazz;
         this.params = builder.params;
         this.requestCode = builder.requestCode;
+        this.flag = builder.flag;
+        this.returnType = builder.returnType;
     }
 
     static final class Builder<T> {
         Method method;
         Object[] args;
+        int flag;
+        Type returnType;
 
         Class clazz;
         Map<String, Object> params;
@@ -43,23 +50,8 @@ final class ServiceMethod<T> {
             this.args = args;
         }
 
-        public Builder method(Method method) {
-            this.method = method;
-            return this;
-        }
-
-        public Builder aClass(Class aClass) {
-            this.clazz = aClass;
-            return this;
-        }
-
-        public Builder requestCode(int aClass) {
-            this.requestCode = requestCode;
-            return this;
-        }
-
-        public ServiceMethod build() throws ClassNotFoundException {
-            Type returnType = method.getGenericReturnType();
+        ServiceMethod build() throws ClassNotFoundException {
+            returnType = method.getGenericReturnType();
 
             Go routPath = method.getAnnotation(Go.class);
             String path = null;
@@ -69,6 +61,11 @@ final class ServiceMethod<T> {
             String className = RouteRegister.getInstance().getRouteMap().get(path);
             if (!TextUtils.isEmpty(className)) {
                 clazz = Class.forName(className);
+            }
+
+            Flags flagInt = method.getAnnotation(Flags.class);
+            if (flagInt != null) {
+                flag = flagInt.value();
             }
 
             params = new HashMap<>();
@@ -91,4 +88,5 @@ final class ServiceMethod<T> {
             return new ServiceMethod<T>(this);
         }
     }
+
 }

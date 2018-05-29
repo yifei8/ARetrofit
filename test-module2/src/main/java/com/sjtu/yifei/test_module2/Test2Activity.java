@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.sjtu.yifei.annotation.Route;
+import com.sjtu.yifei.route.IProvider;
 import com.sjtu.yifei.route.RouteImpl;
 
 @Route(path = "/test-module2/Test2Activity")
@@ -22,14 +23,23 @@ public class Test2Activity extends AppCompatActivity {
         setContentView(R.layout.activity_test2);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        setTitle("Test2Activity");
 
+        String intentExtra = "";
         Intent intent = getIntent();
         if (intent != null) {
             String para1 = intent.getStringExtra("para1");
-            int para2 = intent.getIntExtra("para2", -1);
-            Log.e(TAG, "para1:" + para1 + ",para2:" + para2);
+            int[] para2 = intent.getIntArrayExtra("para2");
+            intentExtra = "intentExtra para1:" + para1 + ",para2:[" + para2[0] + ", " + para2[1] + ", " + para2[2] + "]";
+            Log.e(TAG, "para1:" + para1 + ",para2:" + para2[0] + ", " + para2[1]);
         }
 
+        TextView tv_intent_desc = findViewById(R.id.tv_intent_desc);
+        tv_intent_desc.setText(intentExtra);
+
+        TextView tv_provider_desc = findViewById(R.id.tv_provider_desc);
+        IProvider iProvider = RouteImpl.getTest1Modul1IProvider("provider from module1", 10001);
+        tv_provider_desc.setText(iProvider.login());
 
         TextView textView = findViewById(R.id.tv_test1);
         textView.setOnClickListener(new View.OnClickListener() {
