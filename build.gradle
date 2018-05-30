@@ -8,10 +8,6 @@ buildscript {
             //在未审核通过之前，可以这样使用自己的maven仓库：
             url 'https://dl.bintray.com/iyifei/maven/'
         }
-//        maven { url rootProject.file("repo-api") }
-//        maven { url rootProject.file("repo-annotation") }
-//        maven { url rootProject.file("repo-inject") }
-//        maven { url rootProject.file("repo-complier") }
 
         google()
         jcenter()
@@ -33,7 +29,7 @@ allprojects {
             //在未审核通过之前，可以这样使用自己的maven仓库：
             url 'https://dl.bintray.com/iyifei/maven/'
         }
-//        maven { url rootProject.file("repo-api") }
+        maven { url rootProject.file("repo-api") }
 //        maven { url rootProject.file("repo-annotation") }
 //        maven { url rootProject.file("repo-inject") }
 //        maven { url rootProject.file("repo-complier") }
@@ -55,7 +51,7 @@ task clean(type: Delete) {
 }
 
 ext {
-    auto_api = "0.0.6"
+    auto_api = "0.0.7"
     auto_annotation = "0.0.4"
     auto_complier = "0.0.5"
 }

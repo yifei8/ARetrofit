@@ -17,8 +17,11 @@ public class FragmentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_fragment);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        Fragment fragment = RouteImpl.getTestFragment("from FragmentActivity", "xxxxaaaaa");
+        int[] i = new int[3];
+        i[0]=1;
+        i[1]=2;
+        i[2]=3;
+        Fragment fragment = RouteImpl.getTestFragment("from FragmentActivity", i);
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.placeholder, fragment)

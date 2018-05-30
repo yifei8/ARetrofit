@@ -17,7 +17,7 @@ public class TestFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     private String mParam1;
-    private String mParam2;
+    private int[] mParam2;
     private View root;
 
     public TestFragment() {
@@ -38,7 +38,7 @@ public class TestFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            mParam2 = getArguments().getIntArray(ARG_PARAM2);
         }
     }
 
@@ -56,6 +56,10 @@ public class TestFragment extends Fragment {
         TextView tv1 = root.findViewById(R.id.tv1);
         TextView tv2 = root.findViewById(R.id.tv2);
         tv1.setText(mParam1);
-        tv2.setText(mParam2);
+        StringBuilder p2 = new StringBuilder();
+        for (int i:mParam2) {
+            p2.append("-->").append(i);
+        }
+        tv2.setText(p2.toString());
     }
 }

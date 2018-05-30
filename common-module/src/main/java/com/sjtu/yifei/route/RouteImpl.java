@@ -61,7 +61,7 @@ public class RouteImpl {
         RouteImpl.getInstance().create().launchTest2Activity(para1, para2);
     }
 
-    public static Fragment getTestFragment(String para1, String para2) {
+    public static Fragment getTestFragment(String para1, int[] para2) {
         return RouteImpl.getInstance().create().getTestFragment(para1, para2);
     }
 

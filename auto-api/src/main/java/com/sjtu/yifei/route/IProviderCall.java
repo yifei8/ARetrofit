@@ -4,7 +4,6 @@ import android.os.Parcelable;
 
 import java.io.Serializable;
 import java.lang.reflect.Constructor;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -56,10 +55,6 @@ public class IProviderCall<T> implements Call<T> {
                     parameterTypes[i] = Serializable.class;
                 } else if (val instanceof Parcelable) {
                     parameterTypes[i] = Parcelable.class;
-                } else if (val instanceof Map) {
-                    parameterTypes[i] = Map.class;
-                } else if (val instanceof List) {
-                    parameterTypes[i] = List.class;
                 }
                 i++;
             }

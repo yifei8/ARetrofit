@@ -30,7 +30,7 @@ public interface RouteService {
     boolean launchTest2Activity(@Extra("para1") String para1, @Extra("para2") int[] para2);
 
     @Go("/test-module2/TestFragment")
-    Fragment getTestFragment(@Extra("param1") String para1, @Extra("param2") String para2);
+    Fragment getTestFragment(@Extra("param1") String para1, @Extra("param2") int[] para2);
 
     @Go("/provider/Test1Modul1IProvider")
     IProvider getTest1Modul1IProvider(@Extra("param1") String para1, @Extra("param2") int para2);
