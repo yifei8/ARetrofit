@@ -3,6 +3,7 @@ package com.sjtu.yifei.route;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 
 import com.sjtu.yifei.util.Utils;
 
@@ -139,8 +140,10 @@ public class FragmentCall implements Call {
             }
 
         } catch (InstantiationException e) {
+            Log.e("auto-api", "" + e.getMessage());
             e.printStackTrace();
         } catch (IllegalAccessException e) {
+            Log.e("auto-api", "" + e.getMessage());
             e.printStackTrace();
         }
         return null;

@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         tv_test1.setOnClickListener(v -> RouteImpl.launchTest1Activity("MainActivity ", 100));
         tv_test1_for_result.setOnClickListener(v -> RouteImpl.launchTest1ActivityForResult("MainActivity for result", 100, REQUEST_CODE_TEST1));
         tv_test2.setOnClickListener(v -> RouteImpl.launchTest2Activity("xxxx2", i));
-        tv_fragment.setOnClickListener(v -> RouteImpl.launchFragmentActivity());
+        tv_fragment.setOnClickListener(v -> RouteImpl.launchLoginActivity());
 
     }
 

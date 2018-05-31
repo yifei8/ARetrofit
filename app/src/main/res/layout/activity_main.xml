@@ -44,7 +44,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Test2Activity \nin module(test-module2) " />
+            android:text="Test2Activity \nin module(login-module) " />
 
         <TextView
             android:id="@+id/tv_fragment"

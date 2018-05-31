@@ -86,10 +86,10 @@ public final class RouteRegister implements AutoRegisterContract {
                                 AInterceptor iInterceptor = interceptorClass.getConstructor().newInstance();
                                 interceptors.add(iInterceptor);
                             } catch (Exception ex) {
+                                Log.e("auto-api", "" + ex.getMessage());
                                 throw new RuntimeException(TAG + "ARouter init interceptor error! name = [" + interceptorClassName + "], reason = [" + ex.getMessage() + "]");
                             }
                         }
-                        Log.e(TAG, "size:" + interceptors.size());
                     }
 
                 }
