@@ -49,16 +49,16 @@ public class RouteImpl {
         RouteImpl.getInstance().create().launchTest1Activity(para1, para2);
     }
 
-    public static void launchFragmentActivity() {
-        RouteImpl.getInstance().create().launchFragmentActivity();
-    }
-
     public static void launchTest1ActivityForResult(String para1, int para2, int requestCode) {
         RouteImpl.getInstance().create().launchTest1ActivityForResult(para1, para2, requestCode);
     }
 
     public static void launchTest2Activity(String para1, int[] para2) {
         RouteImpl.getInstance().create().launchTest2Activity(para1, para2);
+    }
+
+    public static void launchFragmentActivity() {
+        RouteImpl.getInstance().create().launchFragmentActivity();
     }
 
     public static Fragment getTestFragment(String para1, int[] para2) {

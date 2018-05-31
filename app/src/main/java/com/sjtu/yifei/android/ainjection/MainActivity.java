@@ -11,7 +11,7 @@ import com.sjtu.yifei.route.RouteImpl;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
-    private static final int REQUEST_CODE_TEST1 = 1001;
+    private static final int REQUEST_CODE_TEST1 = 0x1001;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,8 +27,8 @@ public class MainActivity extends AppCompatActivity {
         i[1]=2;
         i[2]=3;
 
-        tv_test1.setOnClickListener(v -> RouteImpl.launchTest1Activity("xxx1", 100));
-        tv_test1_for_result.setOnClickListener(v -> RouteImpl.launchTest1ActivityForResult("xxx1", 100, REQUEST_CODE_TEST1));
+        tv_test1.setOnClickListener(v -> RouteImpl.launchTest1Activity("MainActivity ", 100));
+        tv_test1_for_result.setOnClickListener(v -> RouteImpl.launchTest1ActivityForResult("MainActivity for result", 100, REQUEST_CODE_TEST1));
         tv_test2.setOnClickListener(v -> RouteImpl.launchTest2Activity("xxxx2", i));
         tv_fragment.setOnClickListener(v -> RouteImpl.launchFragmentActivity());
 
