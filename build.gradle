@@ -30,9 +30,9 @@ allprojects {
             url 'https://dl.bintray.com/iyifei/maven/'
         }
         maven { url rootProject.file("repo-api") }
-//        maven { url rootProject.file("repo-annotation") }
+        maven { url rootProject.file("repo-annotation") }
 //        maven { url rootProject.file("repo-inject") }
-//        maven { url rootProject.file("repo-complier") }
+        maven { url rootProject.file("repo-complier") }
 
         google()
         jcenter()
@@ -52,6 +52,6 @@ task clean(type: Delete) {
 
 ext {
     auto_api = "0.0.7"
-    auto_annotation = "0.0.4"
-    auto_complier = "0.0.5"
+    auto_annotation = "0.0.5"
+    auto_complier = "0.0.6"
 }

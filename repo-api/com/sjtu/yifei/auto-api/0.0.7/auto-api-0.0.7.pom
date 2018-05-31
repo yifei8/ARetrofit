@@ -10,7 +10,7 @@
     <dependency>
       <groupId>com.sjtu.yifei</groupId>
       <artifactId>auto-annotation</artifactId>
-      <version>0.0.4</version>
+      <version>0.0.5</version>
       <scope>compile</scope>
     </dependency>
     <dependency>

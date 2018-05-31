@@ -26,6 +26,7 @@ final class ServiceMethod<T> {
     final int flag;
     final int requestCode;
     final Type returnType;
+    final String routerPath;
 
     ServiceMethod(Builder<T> builder) {
         this.clazz = builder.clazz;
@@ -33,6 +34,7 @@ final class ServiceMethod<T> {
         this.requestCode = builder.requestCode;
         this.flag = builder.flag;
         this.returnType = builder.returnType;
+        this.routerPath = builder.routerPath;
     }
 
     static final class Builder<T> {
@@ -40,6 +42,7 @@ final class ServiceMethod<T> {
         Object[] args;
         int flag;
         Type returnType;
+        String routerPath;
 
         Class clazz;
         Map<String, Object> params;
@@ -54,13 +57,15 @@ final class ServiceMethod<T> {
             returnType = method.getGenericReturnType();
 
             Go routPath = method.getAnnotation(Go.class);
-            String path = null;
             if (routPath != null) {
-                path = routPath.value();
+                routerPath = routPath.value();
             }
-            String className = RouteRegister.getInstance().getRouteMap().get(path);
-            if (!TextUtils.isEmpty(className)) {
-                clazz = Class.forName(className);
+
+            if (!TextUtils.isEmpty(routerPath)) {
+                String className = RouteRegister.getInstance().getRouteMap().get(routerPath);
+                if (!TextUtils.isEmpty(className)) {
+                    clazz = Class.forName(className);
+                }
             }
 
             Flags flagInt = method.getAnnotation(Flags.class);

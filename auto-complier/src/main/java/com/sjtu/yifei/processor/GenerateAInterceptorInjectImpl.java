@@ -1,10 +1,10 @@
 package com.sjtu.yifei.processor;
 
 import com.sjtu.yifei.annotation.Inject;
+import com.sjtu.yifei.ioc.AInterceptorInject;
 import com.sjtu.yifei.ioc.RouteInject;
 import com.sjtu.yifei.utils.Logger;
 import com.squareup.javapoet.ClassName;
-import com.squareup.javapoet.FieldSpec;
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.ParameterizedTypeName;
@@ -26,66 +26,49 @@ import javax.lang.model.element.Modifier;
  * 修改备注：
  */
 
-public class GenerateRouteInjectImpl {
+public class GenerateAInterceptorInjectImpl {
 
-    private static final String SUFFIX = "$$RouteInject";
+    private static final String SUFFIX = "$$AInterceptorInject";
     private static final String DECOLLATOR = "$$";
     private Logger logger;
-    private Map<String, String> routMap;
+    private Map<Integer, String> interceptorMap;
     private Filer filer;
 
-    public GenerateRouteInjectImpl(Logger logger, Filer filer) {
+    public GenerateAInterceptorInjectImpl(Logger logger, Filer filer) {
         this.logger = logger;
         this.filer = filer;
-        routMap = new HashMap<>();
+        interceptorMap = new HashMap<>();
     }
 
-    public void addRouteMap(String path, String className) {
-        routMap.put(path, className);
+    public void addInterceptorInjectMap(int priority, String className) {
+        interceptorMap.put(priority, className);
     }
 
-    /**
-     * generate class like below
-     *
-     * @Inject
-     * public final xxxx$$RouteInject implements RouteInject {
-     *
-     *      @Override
-     *      public Map<String, Class<?>> getRouteMap() {
-     *          Map<String, String> routMap = new HashMap<>();
-     *          routMap.add("", Class<?>);
-     *          ...
-     *          return routMap;
-     *      }
-     *
-     * }
-     *
-     */
-    public void generateRouteInjectImpl(String pkName) {
+    public void generateAInterceptorInjectImpl(String pkName) {
         try {
             String name = pkName.replace(".",DECOLLATOR) + SUFFIX;
             logger.info(String.format("auto generate class = %s", name));
             TypeSpec.Builder builder = TypeSpec.classBuilder(name)
                     .addModifiers(Modifier.PUBLIC)
                     .addAnnotation(Inject.class)
-                    .addSuperinterface(RouteInject.class);
+                    .addSuperinterface(AInterceptorInject.class);
 
             ClassName hashMap = ClassName.get("java.util", "HashMap");
 
             //Map<String, String>
-            TypeName map = ParameterizedTypeName.get(Map.class, String.class, String.class);
+            TypeName map = ParameterizedTypeName.get(Map.class, Integer.class, String.class);
 
-            MethodSpec.Builder injectBuilder = MethodSpec.methodBuilder("getRouteMap")
+            MethodSpec.Builder injectBuilder = MethodSpec.methodBuilder("getAInterceptors")
                     .addModifiers(Modifier.PUBLIC)
                     .addAnnotation(Override.class)
                     .returns(map)
-                    .addStatement("$T routMap = new $T<>()", map, hashMap);
+                    .addStatement("$T interceptorMap = new $T<>()", map, hashMap);
 
-            for (Map.Entry<String, String> entry : routMap.entrySet()) {
+            for (Map.Entry<Integer, String> entry : interceptorMap.entrySet()) {
                 logger.info("add path= " + entry.getKey() + " and class= " + entry.getValue());
-                injectBuilder.addStatement("routMap.put($S, $S)", entry.getKey(), entry.getValue());
+                injectBuilder.addStatement("interceptorMap.put($L, $S)", entry.getKey(), entry.getValue());
             }
-            injectBuilder.addStatement("return routMap");
+            injectBuilder.addStatement("return interceptorMap");
 
             builder.addMethod(injectBuilder.build());
 
