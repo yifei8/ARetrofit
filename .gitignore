@@ -6,3 +6,7 @@
 /build
 /captures
 .externalNativeBuild
+/repo-annotation
+/repo-api
+/repo-complier
+/repo-inject

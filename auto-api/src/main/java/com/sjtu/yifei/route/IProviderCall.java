@@ -1,10 +1,10 @@
 package com.sjtu.yifei.route;
 
 import android.os.Parcelable;
+import android.util.Log;
 
 import java.io.Serializable;
 import java.lang.reflect.Constructor;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -56,16 +56,13 @@ public class IProviderCall<T> implements Call<T> {
                     parameterTypes[i] = Serializable.class;
                 } else if (val instanceof Parcelable) {
                     parameterTypes[i] = Parcelable.class;
-                } else if (val instanceof Map) {
-                    parameterTypes[i] = Map.class;
-                } else if (val instanceof List) {
-                    parameterTypes[i] = List.class;
                 }
                 i++;
             }
             Constructor constructor = serviceMethod.clazz.getConstructor(parameterTypes);
             result = (T) constructor.newInstance(vals);
         } catch (Exception e) {
+            Log.e("auto-api", "" + e.getMessage());
             e.printStackTrace();
             try {
                 result = (T) serviceMethod.clazz.newInstance();

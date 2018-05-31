@@ -16,7 +16,6 @@ public class Consts {
 
     static final String PREFIX_OF_LOGGER = PROJECT + "::Compiler ";
     public static final String ANNOTATION_ROUTE = ANNOTATION_PACKAGE + ".annotation.Route";
-    public static final String ANNOTATION_GO = ANNOTATION_PACKAGE + ".annotation.Go";
-    public static final String ANNOTATION_EXTRA = ANNOTATION_PACKAGE + ".annotation.Extra";
+    public static final String ANNOTATION_GO = ANNOTATION_PACKAGE + ".annotation.Interceptor";
 
 }

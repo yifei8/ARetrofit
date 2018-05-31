@@ -1,6 +1,7 @@
 package com.sjtu.yifei.processor;
 
 import com.google.auto.service.AutoService;
+import com.sjtu.yifei.annotation.Interceptor;
 import com.sjtu.yifei.annotation.Route;
 import com.sjtu.yifei.utils.Logger;
 
@@ -23,7 +24,6 @@ import javax.lang.model.element.TypeElement;
 import javax.lang.model.util.Elements;
 import javax.lang.model.util.Types;
 
-import static com.sjtu.yifei.utils.Consts.ANNOTATION_EXTRA;
 import static com.sjtu.yifei.utils.Consts.ANNOTATION_GO;
 import static com.sjtu.yifei.utils.Consts.ANNOTATION_ROUTE;
 
@@ -38,7 +38,7 @@ import static com.sjtu.yifei.utils.Consts.ANNOTATION_ROUTE;
 //这是用来注册注解处理器要处理的源代码版本。
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
 //这个注解用来注册注解处理器要处理的注解类型。有效值为完全限定名（就是带所在包名和路径的类全名
-@SupportedAnnotationTypes({ANNOTATION_ROUTE, ANNOTATION_GO, ANNOTATION_EXTRA})
+@SupportedAnnotationTypes({ANNOTATION_ROUTE, ANNOTATION_GO})
 //来注解这个处理器，可以自动生成配置信息
 @AutoService(Processor.class)
 public class IProcessor extends AbstractProcessor {
@@ -71,10 +71,38 @@ public class IProcessor extends AbstractProcessor {
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnvironment) {
         if (CollectionUtils.isNotEmpty(annotations)) {
-            Set<? extends Element> routeElements = roundEnvironment.getElementsAnnotatedWith(Route.class);
+            Set<? extends Element> interceptorElements = roundEnvironment.getElementsAnnotatedWith(Interceptor.class);
             try {
+                if (interceptorElements != null && interceptorElements.size() > 0) {
+                    logger.info(">>> Apt interceptor Processor start... <<<");
+                    GenerateAInterceptorInjectImpl generateAInterceptorInject = new GenerateAInterceptorInjectImpl(logger, mFiler);
+                    for (Element element : interceptorElements) {
+                        //1.获取包名
+                        PackageElement packageElement = elementUtils.getPackageOf(element);
+                        String pkName = packageElement.getQualifiedName().toString();
+
+                        //2.获取包装类类型
+                        TypeElement enclosingElement = (TypeElement) element;
+
+                        String enclosingName = enclosingElement.getQualifiedName().toString();
+                        logger.info(String.format("enclosindClass = %s", enclosingName));
+
+                        //3.获取注解元数据
+                        Interceptor aptType = element.getAnnotation(Interceptor.class);
+                        int value = aptType.priority();
+                        logger.info(String.format("value = %s", value));
+
+                        generateAInterceptorInject.addInterceptorInjectMap(value, enclosingName);
+                    }
+                    String autoGenerateClass = "com.sjtu.yifei." + RandomStringUtils.randomAlphabetic(10);
+                    generateAInterceptorInject.generateAInterceptorInjectImpl(autoGenerateClass);
+                    logger.info(">>> Apt interceptor Processor succeed <<<");
+                    return true;
+                }
+
+                Set<? extends Element> routeElements = roundEnvironment.getElementsAnnotatedWith(Route.class);
                 if (routeElements != null && routeElements.size() > 0) {
-                    logger.info(">>> Apt Processor start... <<<");
+                    logger.info(">>> Apt route Processor start... <<<");
                     GenerateRouteInjectImpl generateRouteInject = new GenerateRouteInjectImpl(logger, mFiler);
                     for (Element element : routeElements) {
                         //1.获取包名
@@ -96,13 +124,14 @@ public class IProcessor extends AbstractProcessor {
                     }
                     String autoGenerateClass = "com.sjtu.yifei." + RandomStringUtils.randomAlphabetic(10);
                     generateRouteInject.generateRouteInjectImpl(autoGenerateClass);
-                    logger.info(">>> Apt Processor succeed <<<");
+                    logger.info(">>> Apt route Processor succeed <<<");
                     return true;
                 }
             } catch (Exception e) {
                 logger.error(e);
-                logger.error(">>> --- Apt Processor failed <<<");
+                logger.error(">>> --- Apt route Processor failed <<<");
             }
+
             return true;
         }
         return false;

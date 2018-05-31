@@ -38,7 +38,7 @@ public final class Routerfit {
                 }
                 ServiceMethod<Object> serviceMethod = (ServiceMethod<Object>) loadServiceMethod(method, args);
                 if (Utils.isSpecificClass(serviceMethod.clazz, Activity.class)) {
-                    Call<T> call = new ActivityCall(serviceMethod);
+                    Call<T> call = (Call<T>) new ActivityCall(serviceMethod);
                     return call.execute();
                 } else if (Utils.isSpecificClass(serviceMethod.clazz, Fragment.class)
                         || Utils.isSpecificClass(serviceMethod.clazz, android.app.Fragment.class)) {

@@ -69,9 +69,6 @@ public class GenerateRouteInjectImpl {
                     .addModifiers(Modifier.PUBLIC)
                     .addAnnotation(Inject.class)
                     .addSuperinterface(RouteInject.class);
-            FieldSpec fieldSpec = FieldSpec.builder(ParameterizedTypeName.get(Map.class, String.class, Class.class),"routMap", Modifier.PRIVATE)
-                    .addModifiers(Modifier.PUBLIC, Modifier.STATIC)
-                    .build();
 
             ClassName hashMap = ClassName.get("java.util", "HashMap");
 

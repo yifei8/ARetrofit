@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
+    android:gravity="center_horizontal"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.sjtu.yifei.test_module1.Test1Activity"
     tools:showIn="@layout/activity_test1">
 
     <TextView
+        android:id="@+id/tv_intent_params"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:text="Test1Activity"/>
+        android:layout_height="40dp" />
 
-    <TextView
+    <Button
         android:id="@+id/tv_finish"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_marginTop="40dp"
-        android:text="set result ok and finish"/>
-</LinearLayout>
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginBottom="20dp"
+        android:layout_alignParentBottom="true"
+        android:text="set result ok and finish" />
+</RelativeLayout>

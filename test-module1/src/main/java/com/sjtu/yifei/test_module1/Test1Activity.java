@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.sjtu.yifei.annotation.Route;
@@ -21,15 +22,18 @@ public class Test1Activity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        TextView tv_intent_params = findViewById(R.id.tv_intent_params);
+
         Intent intent = getIntent();
         if (intent != null) {
             String para1 = intent.getStringExtra("para1");
             int para2 = intent.getIntExtra("para2", -1);
             Log.e(TAG, "para1:" + para1 + ",para2:" + para2);
+            tv_intent_params.setText("intent extras: \npara1:" + para1 + ",para2:" + para2);
         }
 
-        TextView textView = findViewById(R.id.tv_finish);
-        textView.setOnClickListener(v -> {
+        Button button = findViewById(R.id.tv_finish);
+        button.setOnClickListener(v -> {
             Intent result = new Intent();
             result.putExtra("result_para", "this is test set result ok");
             setResult(RESULT_OK, result);
