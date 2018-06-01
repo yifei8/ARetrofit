@@ -28,7 +28,7 @@ public final class RouteRegister implements AutoRegisterContract {
 
     private static final String TAG = "RouteRegister";
 
-    private Map<String, String> routeMap;
+    private Map<String, Class<?>> routeMap;
     private List<AInterceptor> interceptors = new ArrayList<>();
 
     private RouteRegister() {
@@ -43,7 +43,7 @@ public final class RouteRegister implements AutoRegisterContract {
         return InstanceHolder.instance;
     }
 
-    Map<String, String> getRouteMap() {
+    Map<String, Class<?>> getRouteMap() {
         return routeMap;
     }
 
@@ -63,31 +63,31 @@ public final class RouteRegister implements AutoRegisterContract {
                 Class<?> clazz = Class.forName(className);
                 Object obj = clazz.getConstructor().newInstance();
                 if (obj instanceof RouteInject) {
-                    Map<String, String> map = ((RouteInject) obj).getRouteMap();
+                    Map<String, Class<?>> map = ((RouteInject) obj).getRouteMap();
                     if (map != null) {
                         routeMap.putAll(map);
                     }
                 } else if (obj instanceof AInterceptorInject) {
-                    Map<Integer, String> integerClassMap = ((AInterceptorInject) obj).getAInterceptors();
+                    Map<Integer, Class<?>> integerClassMap = ((AInterceptorInject) obj).getAInterceptors();
                     if (integerClassMap != null && integerClassMap.size() > 0) {
-                        List<Map.Entry<Integer, String>> infoIds = new ArrayList<>(integerClassMap.entrySet());
+                        List<Map.Entry<Integer, Class<?>>> infoIds = new ArrayList<>(integerClassMap.entrySet());
                         // 对HashMap中的key 进行排序
-                        Collections.sort(infoIds, new Comparator<Map.Entry<Integer, String>>() {
-                            public int compare(Map.Entry<Integer, String> o1,
-                                               Map.Entry<Integer, String> o2) {
+                        Collections.sort(infoIds, new Comparator<Map.Entry<Integer, Class<?>>>() {
+                            public int compare(Map.Entry<Integer, Class<?>> o1,
+                                               Map.Entry<Integer, Class<?>> o2) {
                                 return o2.getKey() - o1.getKey();
                             }
                         });
 
-                        for (Map.Entry<Integer, String> entry : infoIds) {
-                            String interceptorClassName = entry.getValue();
+                        for (Map.Entry<Integer, Class<?>> entry : infoIds) {
+                            Class<?> aInterceptorClassName = entry.getValue();
                             try {
-                                Class<? extends AInterceptor> interceptorClass = (Class<? extends AInterceptor>) Class.forName(interceptorClassName);
+                                Class<? extends AInterceptor> interceptorClass = (Class<? extends AInterceptor>) aInterceptorClassName;
                                 AInterceptor iInterceptor = interceptorClass.getConstructor().newInstance();
                                 interceptors.add(iInterceptor);
                             } catch (Exception ex) {
                                 Log.e("auto-api", "" + ex.getMessage());
-                                throw new RuntimeException(TAG + "ARouter init interceptor error! name = [" + interceptorClassName + "], reason = [" + ex.getMessage() + "]");
+                                throw new RuntimeException(TAG + "ARouter init interceptor error! name = [" + aInterceptorClassName.getSimpleName() + "], reason = [" + ex.getMessage() + "]");
                             }
                         }
                     }

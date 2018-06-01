@@ -10,12 +10,15 @@ import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.ParameterizedTypeName;
 import com.squareup.javapoet.TypeName;
 import com.squareup.javapoet.TypeSpec;
+import com.squareup.javapoet.WildcardTypeName;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.processing.Filer;
 import javax.lang.model.element.Modifier;
+
+import static com.squareup.javapoet.WildcardTypeName.subtypeOf;
 
 /**
  * 类描述：
@@ -31,7 +34,7 @@ public class GenerateAInterceptorInjectImpl {
     private static final String SUFFIX = "$$AInterceptorInject";
     private static final String DECOLLATOR = "$$";
     private Logger logger;
-    private Map<Integer, String> interceptorMap;
+    private Map<Integer, ClassName> interceptorMap;
     private Filer filer;
 
     public GenerateAInterceptorInjectImpl(Logger logger, Filer filer) {
@@ -40,7 +43,7 @@ public class GenerateAInterceptorInjectImpl {
         interceptorMap = new HashMap<>();
     }
 
-    public void addInterceptorInjectMap(int priority, String className) {
+    public void addInterceptorInjectMap(int priority, ClassName className) {
         interceptorMap.put(priority, className);
     }
 
@@ -55,8 +58,12 @@ public class GenerateAInterceptorInjectImpl {
 
             ClassName hashMap = ClassName.get("java.util", "HashMap");
 
-            //Map<String, String>
-            TypeName map = ParameterizedTypeName.get(Map.class, Integer.class, String.class);
+            //Map<String, Class<?>>
+            TypeName wildcard = WildcardTypeName.subtypeOf(Object.class);
+            TypeName classOfAny = ParameterizedTypeName.get(ClassName.get(Class.class), wildcard);
+            TypeName string = ClassName.get(Integer.class);
+
+            TypeName map = ParameterizedTypeName.get(ClassName.get(Map.class), string, classOfAny);
 
             MethodSpec.Builder injectBuilder = MethodSpec.methodBuilder("getAInterceptors")
                     .addModifiers(Modifier.PUBLIC)
@@ -64,9 +71,9 @@ public class GenerateAInterceptorInjectImpl {
                     .returns(map)
                     .addStatement("$T interceptorMap = new $T<>()", map, hashMap);
 
-            for (Map.Entry<Integer, String> entry : interceptorMap.entrySet()) {
-                logger.info("add path= " + entry.getKey() + " and class= " + entry.getValue());
-                injectBuilder.addStatement("interceptorMap.put($L, $S)", entry.getKey(), entry.getValue());
+            for (Map.Entry<Integer, ClassName> entry : interceptorMap.entrySet()) {
+                logger.info("add path= " + entry.getKey() + " and class= " + entry.getValue().simpleName());
+                injectBuilder.addStatement("interceptorMap.put($L, $T.class)", entry.getKey(), entry.getValue());
             }
             injectBuilder.addStatement("return interceptorMap");
 

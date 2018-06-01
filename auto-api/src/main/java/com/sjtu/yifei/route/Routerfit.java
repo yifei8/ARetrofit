@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Application;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 
 import com.sjtu.yifei.util.ActivityLifecycleMonitor;
 

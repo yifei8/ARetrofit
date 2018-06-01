@@ -4,6 +4,7 @@ import com.google.auto.service.AutoService;
 import com.sjtu.yifei.annotation.Interceptor;
 import com.sjtu.yifei.annotation.Route;
 import com.sjtu.yifei.utils.Logger;
+import com.squareup.javapoet.ClassName;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -83,16 +84,15 @@ public class IProcessor extends AbstractProcessor {
 
                         //2.获取包装类类型
                         TypeElement enclosingElement = (TypeElement) element;
-
-                        String enclosingName = enclosingElement.getQualifiedName().toString();
-                        logger.info(String.format("enclosindClass = %s", enclosingName));
+                        ClassName className = ClassName.get(enclosingElement);
+                        logger.info(String.format("enclosindClass = %s", className.enclosingClassName()));
 
                         //3.获取注解元数据
                         Interceptor aptType = element.getAnnotation(Interceptor.class);
                         int value = aptType.priority();
                         logger.info(String.format("value = %s", value));
 
-                        generateAInterceptorInject.addInterceptorInjectMap(value, enclosingName);
+                        generateAInterceptorInject.addInterceptorInjectMap(value, className);
                     }
                     String autoGenerateClass = "com.sjtu.yifei." + RandomStringUtils.randomAlphabetic(10);
                     generateAInterceptorInject.generateAInterceptorInjectImpl(autoGenerateClass);
@@ -111,16 +111,15 @@ public class IProcessor extends AbstractProcessor {
 
                         //2.获取包装类类型
                         TypeElement enclosingElement = (TypeElement) element;
-
-                        String enclosingName = enclosingElement.getQualifiedName().toString();
-                        logger.info(String.format("enclosindClass = %s", enclosingName));
+                        ClassName className = ClassName.get(enclosingElement);
+                        logger.info(String.format("enclosindClass = %s", className.enclosingClassName()));
 
                         //3.获取注解元数据
                         Route aptType = element.getAnnotation(Route.class);
                         String value = aptType.path();
                         logger.info(String.format("value = %s", value));
 
-                        generateRouteInject.addRouteMap(value, enclosingName);
+                        generateRouteInject.addRouteMap(value, className);
                     }
                     String autoGenerateClass = "com.sjtu.yifei." + RandomStringUtils.randomAlphabetic(10);
                     generateRouteInject.generateRouteInjectImpl(autoGenerateClass);

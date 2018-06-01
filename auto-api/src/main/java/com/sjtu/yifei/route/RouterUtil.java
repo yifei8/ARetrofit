@@ -24,7 +24,7 @@ final class RouterUtil {
     }
 
     protected static boolean isSpecificClass(Class clazz, Class youSpecific) {
-        while (clazz != Object.class) {
+        while (clazz != null && clazz != Object.class) {
             if (clazz == youSpecific) {
                 return true;
             }

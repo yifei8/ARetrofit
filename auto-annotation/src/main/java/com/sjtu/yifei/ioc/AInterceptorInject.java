@@ -13,5 +13,5 @@ import java.util.Map;
 
 public interface AInterceptorInject {
 
-    Map<Integer, String> getAInterceptors();
+    Map<Integer, Class<?>> getAInterceptors();
 }

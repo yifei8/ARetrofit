@@ -20,10 +20,22 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    signingConfigs {
+        releaseconfig {
+            storeFile file("../androidretrofit.jks")
+            storePassword "yifei8"
+            keyAlias "androidretrofit"
+            keyPassword "yifei8"
+        }
+    }
+
     buildTypes {
         release {
             debuggable false
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
+            zipAlignEnabled true
+            signingConfig signingConfigs.releaseconfig
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }

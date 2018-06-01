@@ -1,6 +1,7 @@
 package com.sjtu.yifei.route;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.sjtu.yifei.annotation.Extra;
 import com.sjtu.yifei.annotation.Flags;
@@ -62,11 +63,10 @@ final class ServiceMethod<T> {
             }
 
             if (!TextUtils.isEmpty(routerPath)) {
-                String className = RouteRegister.getInstance().getRouteMap().get(routerPath);
-                if (!TextUtils.isEmpty(className)) {
-                    clazz = Class.forName(className);
-                }
+                clazz = RouteRegister.getInstance().getRouteMap().get(routerPath);
+                Log.i("auto-api", routerPath + ",className:" + clazz.getSimpleName() + ", serviceMethod.clazz is null " + (clazz == null));
             }
+
 
             Flags flagInt = method.getAnnotation(Flags.class);
             if (flagInt != null) {

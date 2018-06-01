@@ -20,6 +20,9 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
--keep public class com.sjtu.yifei.launcher.**{*;}
--keep public class com.sjtu.yifei.route.**{*;}
+
+-keep class * implements com.sjtu.yifei.ioc.**{*;}
 -keep class * implements com.sjtu.yifei.annotation.AutoRegisterContract{*;}
+
+# 自己声明的服务需要防止混淆
+-keep class * implements com.sjtu.yifei.route.ILoginProvider{*;}

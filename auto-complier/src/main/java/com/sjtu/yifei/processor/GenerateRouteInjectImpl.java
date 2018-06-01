@@ -10,6 +10,7 @@ import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.ParameterizedTypeName;
 import com.squareup.javapoet.TypeName;
 import com.squareup.javapoet.TypeSpec;
+import com.squareup.javapoet.WildcardTypeName;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,7 +32,7 @@ public class GenerateRouteInjectImpl {
     private static final String SUFFIX = "$$RouteInject";
     private static final String DECOLLATOR = "$$";
     private Logger logger;
-    private Map<String, String> routMap;
+    private Map<String, ClassName> routMap;
     private Filer filer;
 
     public GenerateRouteInjectImpl(Logger logger, Filer filer) {
@@ -40,7 +41,7 @@ public class GenerateRouteInjectImpl {
         routMap = new HashMap<>();
     }
 
-    public void addRouteMap(String path, String className) {
+    public void addRouteMap(String path, ClassName className) {
         routMap.put(path, className);
     }
 
@@ -73,7 +74,11 @@ public class GenerateRouteInjectImpl {
             ClassName hashMap = ClassName.get("java.util", "HashMap");
 
             //Map<String, String>
-            TypeName map = ParameterizedTypeName.get(Map.class, String.class, String.class);
+            TypeName wildcard = WildcardTypeName.subtypeOf(Object.class);
+            TypeName classOfAny = ParameterizedTypeName.get(ClassName.get(Class.class), wildcard);
+            TypeName string = ClassName.get(String.class);
+
+            TypeName map = ParameterizedTypeName.get(ClassName.get(Map.class), string, classOfAny);
 
             MethodSpec.Builder injectBuilder = MethodSpec.methodBuilder("getRouteMap")
                     .addModifiers(Modifier.PUBLIC)
@@ -81,9 +86,9 @@ public class GenerateRouteInjectImpl {
                     .returns(map)
                     .addStatement("$T routMap = new $T<>()", map, hashMap);
 
-            for (Map.Entry<String, String> entry : routMap.entrySet()) {
-                logger.info("add path= " + entry.getKey() + " and class= " + entry.getValue());
-                injectBuilder.addStatement("routMap.put($S, $S)", entry.getKey(), entry.getValue());
+            for (Map.Entry<String, ClassName> entry : routMap.entrySet()) {
+                logger.info("add path= " + entry.getKey() + " and class= " + entry.getValue().enclosingClassName());
+                injectBuilder.addStatement("routMap.put($S, $T.class)", entry.getKey(), entry.getValue());
             }
             injectBuilder.addStatement("return routMap");
 

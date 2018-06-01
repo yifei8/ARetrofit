@@ -13,5 +13,5 @@ import java.util.Map;
 
 public interface RouteInject {
 
-    Map<String, String> getRouteMap();
+    Map<String, Class<?>> getRouteMap();
 }
