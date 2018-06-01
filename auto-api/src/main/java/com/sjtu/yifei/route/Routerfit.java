@@ -1,9 +1,11 @@
 package com.sjtu.yifei.route;
 
 import android.app.Activity;
+import android.app.Application;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 
-import com.sjtu.yifei.util.Utils;
+import com.sjtu.yifei.util.ActivityLifecycleMonitor;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -22,13 +24,29 @@ public final class Routerfit {
 
     private final Map<Method, ServiceMethod<?>> serviceMethodCache = new ConcurrentHashMap<>();
 
+    public static void init(@NonNull Application application) {
+        ActivityLifecycleMonitor.init(application);
+    }
+
+    private static class InstanceHolder {
+        private static final Routerfit instance = new Routerfit.Builder().build();
+    }
+
+    private static Routerfit getInstance() {
+        return InstanceHolder.instance;
+    }
+
     private Routerfit() {
         RouteRegister.getInstance().init();
     }
 
-    public <T> T create(final Class<T> service) {
-        Utils.validateServiceInterface(service);
+    public static <T> T register(Class<T> service) {
+        Routerfit routerfit = getInstance();
+        return routerfit.create(service);
+    }
 
+    private  <T> T create(final Class<T> service) {
+        RouterUtil.validateServiceInterface(service);
         return (T) Proxy.newProxyInstance(service.getClassLoader(), new Class[]{service}, new InvocationHandler() {
             @Override
             public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
@@ -37,11 +55,11 @@ public final class Routerfit {
                     return method.invoke(this, args);
                 }
                 ServiceMethod<Object> serviceMethod = (ServiceMethod<Object>) loadServiceMethod(method, args);
-                if (Utils.isSpecificClass(serviceMethod.clazz, Activity.class)) {
+                if (RouterUtil.isSpecificClass(serviceMethod.clazz, Activity.class)) {
                     Call<T> call = (Call<T>) new ActivityCall(serviceMethod);
                     return call.execute();
-                } else if (Utils.isSpecificClass(serviceMethod.clazz, Fragment.class)
-                        || Utils.isSpecificClass(serviceMethod.clazz, android.app.Fragment.class)) {
+                } else if (RouterUtil.isSpecificClass(serviceMethod.clazz, Fragment.class)
+                        || RouterUtil.isSpecificClass(serviceMethod.clazz, android.app.Fragment.class)) {
                     Call<T> call = new FragmentCall(serviceMethod);
                     return call.execute();
                 } else {
@@ -51,8 +69,6 @@ public final class Routerfit {
             }
         });
     }
-
-
 
     private ServiceMethod<?> loadServiceMethod(Method method, Object[] args) throws ClassNotFoundException {
         ServiceMethod<?> result = serviceMethodCache.get(method);
@@ -68,12 +84,12 @@ public final class Routerfit {
         return result;
     }
 
-    public static final class Builder {
+    private static final class Builder {
 
-        public Builder() {
+        private Builder() {
         }
 
-        public Routerfit build() {
+        private Routerfit build() {
             return new Routerfit();
         }
     }

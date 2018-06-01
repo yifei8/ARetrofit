@@ -2,7 +2,8 @@ package com.sjtu.yifei.test_module2;
 
 import com.sjtu.yifei.annotation.Route;
 import com.sjtu.yifei.route.ILoginProvider;
-import com.sjtu.yifei.route.RouteImpl;
+import com.sjtu.yifei.route.RouteService;
+import com.sjtu.yifei.route.Routerfit;
 
 /**
  * 类描述：
@@ -26,7 +27,7 @@ public class ILoginProviderImpl implements ILoginProvider {
 
     @Override
     public String login() {
-        RouteImpl.launchLoginActivity();
+        Routerfit.register(RouteService.class).launchLoginActivity();
         return "ILoginProviderImpl para1:" + para1 + ",para2:" + para2;
     }
 }

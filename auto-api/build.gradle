@@ -30,7 +30,7 @@ dependencies {
     compile "com.android.support:support-v4:${SUPPORT_LIB_VERSION}"
 }
 
-//apply from: '../bintrayv1.gradle'
-//apply from: '../installv1.gradle'
+apply from: '../bintrayv1.gradle'
+apply from: '../installv1.gradle'
 
 //apply from: '../bintray.gradle'

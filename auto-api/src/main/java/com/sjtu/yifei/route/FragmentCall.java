@@ -5,8 +5,6 @@ import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 
-import com.sjtu.yifei.util.Utils;
-
 import java.io.Serializable;
 import java.util.Map;
 
@@ -29,7 +27,7 @@ public class FragmentCall implements Call {
             if (serviceMethod.clazz == null) {
                 return null;
             }
-            if (Utils.isSpecificClass(serviceMethod.clazz, Fragment.class)) {
+            if (RouterUtil.isSpecificClass(serviceMethod.clazz, Fragment.class)) {
                 Fragment fragment = (Fragment) serviceMethod.clazz.newInstance();
                 Bundle bundle = new Bundle();
                 for (Map.Entry<String, Object> entry : serviceMethod.params.entrySet()) {
@@ -83,7 +81,7 @@ public class FragmentCall implements Call {
                 }
                 fragment.setArguments(bundle);
                 return fragment;
-            } else if (Utils.isSpecificClass(serviceMethod.clazz, android.app.Fragment.class)) {
+            } else if (RouterUtil.isSpecificClass(serviceMethod.clazz, android.app.Fragment.class)) {
                 android.app.Fragment fragment = (android.app.Fragment) serviceMethod.clazz.newInstance();
                 Bundle bundle = new Bundle();
                 for (Map.Entry<String, Object> entry : serviceMethod.params.entrySet()) {

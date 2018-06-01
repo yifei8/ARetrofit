@@ -1,11 +1,13 @@
 package com.sjtu.yifei.route;
 
+import android.accounts.AccountAuthenticatorActivity;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 
-import com.sjtu.yifei.util.Utils;
+import com.sjtu.yifei.util.ActivityLifecycleMonitor;
 
 import java.io.Serializable;
 import java.util.Map;
@@ -30,7 +32,7 @@ public class CallActivityAInterceptor implements AInterceptor {
         if (serviceMethod.clazz == null) {
             return false;
         }
-        Activity activity = Utils.getTopActivity();
+        Activity activity = ActivityLifecycleMonitor.getTopActivity();
         if (activity != null) {
             Intent intent = new Intent(activity, serviceMethod.clazz);
             for (Map.Entry<String, Object> entry : serviceMethod.params.entrySet()) {

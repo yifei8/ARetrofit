@@ -10,8 +10,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.sjtu.yifei.annotation.Route;
-import com.sjtu.yifei.route.ILoginProvider;
-import com.sjtu.yifei.route.RouteImpl;
+import com.sjtu.yifei.route.RouteService;
+import com.sjtu.yifei.route.Routerfit;
 
 @Route(path = "/login-module/Test2Activity")
 public class Test2Activity extends AppCompatActivity {
@@ -44,7 +44,7 @@ public class Test2Activity extends AppCompatActivity {
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RouteImpl.launchTest1Activity("from Test2Activity", 100);
+                Routerfit.register(RouteService.class).launchTest1Activity("from Test2Activity", 100);
             }
         });
     }

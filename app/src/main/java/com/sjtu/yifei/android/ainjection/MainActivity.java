@@ -6,7 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.sjtu.yifei.route.RouteImpl;
+import com.sjtu.yifei.route.RouteService;
+import com.sjtu.yifei.route.Routerfit;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,10 +28,10 @@ public class MainActivity extends AppCompatActivity {
         i[1]=2;
         i[2]=3;
 
-        tv_test1.setOnClickListener(v -> RouteImpl.launchTest1Activity("MainActivity ", 100));
-        tv_test1_for_result.setOnClickListener(v -> RouteImpl.launchTest1ActivityForResult("MainActivity for result", 100, REQUEST_CODE_TEST1));
-        tv_test2.setOnClickListener(v -> RouteImpl.launchTest2Activity("xxxx2", i));
-        tv_fragment.setOnClickListener(v -> RouteImpl.launchFragmentActivity());
+        tv_test1.setOnClickListener(v -> Routerfit.register(RouteService.class).launchTest1Activity("MainActivity ", 100));
+        tv_test1_for_result.setOnClickListener(v -> Routerfit.register(RouteService.class).launchTest1ActivityForResult("MainActivity for result", 100, REQUEST_CODE_TEST1));
+        tv_test2.setOnClickListener(v -> Routerfit.register(RouteService.class).launchTest2Activity("xxxx2", i));
+        tv_fragment.setOnClickListener(v -> Routerfit.register(RouteService.class).launchFragmentActivity());
 
     }
 

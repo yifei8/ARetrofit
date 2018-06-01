@@ -24,7 +24,7 @@ import java.util.Map;
  * 修改备注：
  */
 
-public class Utils {
+public final class ActivityLifecycleMonitor {
 
     @SuppressLint("StaticFieldLeak")
     private static Application sApplication;
@@ -68,18 +68,8 @@ public class Utils {
         }
     };
 
-    private Utils() {
+    private ActivityLifecycleMonitor() {
         throw new UnsupportedOperationException("u can't instantiate me...");
-    }
-
-    /**
-     * Init utils.
-     * <p>Init it in the class of Application.</p>
-     *
-     * @param context context
-     */
-    public static void init(@NonNull final Context context) {
-        init((Application) context.getApplicationContext());
     }
 
     /**
@@ -90,8 +80,8 @@ public class Utils {
      */
     public static void init(@NonNull final Application app) {
         if (sApplication == null) {
-            Utils.sApplication = app;
-            Utils.sApplication.registerActivityLifecycleCallbacks(mCallbacks);
+            ActivityLifecycleMonitor.sApplication = app;
+            ActivityLifecycleMonitor.sApplication.registerActivityLifecycleCallbacks(mCallbacks);
         }
     }
 
@@ -142,21 +132,21 @@ public class Utils {
     public static Context getTopActivityOrApp() {
         if (isAppForeground()) {
             Activity topActivity = getTopActivity();
-            return topActivity == null ? Utils.getApp() : topActivity;
+            return topActivity == null ? ActivityLifecycleMonitor.getApp() : topActivity;
         } else {
-            return Utils.getApp();
+            return ActivityLifecycleMonitor.getApp();
         }
     }
 
     public static boolean isAppForeground() {
         ActivityManager am =
-                (ActivityManager) Utils.getApp().getSystemService(Context.ACTIVITY_SERVICE);
+                (ActivityManager) ActivityLifecycleMonitor.getApp().getSystemService(Context.ACTIVITY_SERVICE);
         if (am == null) return false;
         List<ActivityManager.RunningAppProcessInfo> info = am.getRunningAppProcesses();
         if (info == null || info.size() == 0) return false;
         for (ActivityManager.RunningAppProcessInfo aInfo : info) {
             if (aInfo.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND) {
-                return aInfo.processName.equals(Utils.getApp().getPackageName());
+                return aInfo.processName.equals(ActivityLifecycleMonitor.getApp().getPackageName());
             }
         }
         return false;
@@ -186,7 +176,7 @@ public class Utils {
                     Field activityField = activityRecordClass.getDeclaredField("activity");
                     activityField.setAccessible(true);
                     Activity activity = (Activity) activityField.get(activityRecord);
-                    Utils.setTopActivity(activity);
+                    ActivityLifecycleMonitor.setTopActivity(activity);
                     return activity;
                 }
             }
@@ -202,28 +192,6 @@ public class Utils {
             e.printStackTrace();
         }
         return null;
-    }
-
-    public static <T> void validateServiceInterface(Class<T> service) {
-        if (!service.isInterface()) {
-            throw new IllegalArgumentException("API declarations must be interfaces.");
-        }
-        // Prevent API interfaces from extending other interfaces. This not only avoids a bug in
-        // Android (http://b.android.com/58753) but it forces composition of API declarations which is
-        // the recommended pattern.
-        if (service.getInterfaces().length > 0) {
-            throw new IllegalArgumentException("API interfaces must not extend other interfaces.");
-        }
-    }
-
-    public static boolean isSpecificClass(Class clazz, Class youSpecific) {
-        while (clazz != Object.class) {
-            if (clazz == youSpecific) {
-                return true;
-            }
-            clazz = clazz.getSuperclass();
-        }
-        return false;
     }
 
 }
