@@ -17,7 +17,7 @@ buildscript {
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.2'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
         classpath "com.sjtu.yifei:auto-inject:0.0.5"
-        // NOTE: Do not place your application dependencies here; they belong
+        // NOTE: Do not place your application dependencieshere; they belong
         // in the individual module build.gradle files
     }
 }
@@ -31,7 +31,6 @@ allprojects {
         }
 //        maven { url rootProject.file("repo-api") }
 //        maven { url rootProject.file("repo-annotation") }
-//        maven { url rootProject.file("repo-inject") }
 //        maven { url rootProject.file("repo-complier") }
 
         google()
@@ -51,7 +50,7 @@ task clean(type: Delete) {
 }
 
 ext {
-    auto_api = "0.0.9"
-    auto_annotation = "0.0.5"
-    auto_complier = "0.0.6"
+    auto_api = "0.1.0"
+    auto_annotation = "0.0.6"
+    auto_complier = "0.0.7"
 }
