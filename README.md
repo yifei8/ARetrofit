@@ -1,3 +1,9 @@
+#### 最新版本
+
+模块|auto-api|auto-complier|auto-annotation|auto-inject
+---|---|---|---|---
+最新版本|[![Download](https://api.bintray.com/packages/iyifei/maven/auto-api/images/download.svg)](https://bintray.com/iyifei/maven/auto-api/_latestVersion)|[![Download](https://api.bintray.com/packages/iyifei/maven/auto-complier/images/download.svg)](https://bintray.com/iyifei/maven/auto-complier/_latestVersion)|[![Download](https://api.bintray.com/packages/iyifei/maven/auto-annotation/images/download.svg)](https://bintray.com/iyifei/maven/auto-annotation/_latestVersion)|[![Download](https://api.bintray.com/packages/iyifei/maven/auto-inject/images/download.svg)](https://bintray.com/iyifei/maven/auto-inject/_latestVersion)
+
 > Android组件化超级路由，为简单而生。
 
 ### Github 源码: [ARetrofit](https://github.com/yifei8/ARetrofit)
