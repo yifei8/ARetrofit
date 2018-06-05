@@ -16,7 +16,7 @@
 
 ARetrofit一款优秀的Android组件化框架（皮一下^_^开心），可以轻松实现跨module通信。这里之所以使用Retrofit作为后缀命名主要是为了尊重retrofit大神的架构思路，其目的降低开发者的学习和使用成本。
 
-如果你正在对项目进行组件化，AndroidRetrofit将是不二选择。
+如果你正在对项目进行组件化，ARetrofit将是不二选择。
 
 ## 二 功能介绍
 - 支持跨module通信
