@@ -200,7 +200,8 @@ public class LoginInterceptor implements AInterceptor {
 - 微信群
 ![微信群.jpeg](https://user-gold-cdn.xitu.io/2018/6/5/163cea15e51a136a?w=200&h=266&f=jpeg&s=14284)
 - Email
-yifei8@gmail.com
+iyifei8@gmail.com
+
 644912187@qq.com
 ## 五 欢迎 fork、issues
 
