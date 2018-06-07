@@ -5,6 +5,7 @@ import android.app.Application;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.sjtu.yifei.exception.RouteNotFoundException;
@@ -59,6 +60,10 @@ public final class Routerfit {
                     return method.invoke(this, args);
                 }
                 ServiceMethod<Object> serviceMethod = (ServiceMethod<Object>) loadServiceMethod(method, args);
+                if (!TextUtils.isEmpty(serviceMethod.uristring)) {
+                    Call<T> call = (Call<T>) new ActivityCall(serviceMethod);
+                    return call.execute();
+                }
                 try {
                     if (serviceMethod.clazz == null) {
                         throw new RouteNotFoundException("There is no route match the path \"" + serviceMethod.routerPath + "\"");

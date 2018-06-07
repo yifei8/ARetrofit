@@ -7,6 +7,7 @@ import com.sjtu.yifei.annotation.Extra;
 import com.sjtu.yifei.annotation.Flags;
 import com.sjtu.yifei.annotation.Go;
 import com.sjtu.yifei.annotation.RequestCode;
+import com.sjtu.yifei.annotation.Uri;
 
 /**
  * 类描述：
@@ -41,4 +42,5 @@ public interface RouteService {
     @Go("/login-module/ILoginProviderImpl")
     ILoginProvider getILoginProviderImpl(@Extra("param1") String para1, @Extra("param2") int para2);
 
+    boolean launchSchemeActivity(@Uri String uristring);
 }

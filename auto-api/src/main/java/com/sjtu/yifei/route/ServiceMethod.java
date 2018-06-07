@@ -6,6 +6,7 @@ import com.sjtu.yifei.annotation.Extra;
 import com.sjtu.yifei.annotation.Flags;
 import com.sjtu.yifei.annotation.Go;
 import com.sjtu.yifei.annotation.RequestCode;
+import com.sjtu.yifei.annotation.Uri;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -27,6 +28,8 @@ final class ServiceMethod<T> {
     final int requestCode;
     final Type returnType;
     final String routerPath;
+    final String uristring;
+
 
     ServiceMethod(Builder<T> builder) {
         this.clazz = builder.clazz;
@@ -35,6 +38,7 @@ final class ServiceMethod<T> {
         this.flag = builder.flag;
         this.returnType = builder.returnType;
         this.routerPath = builder.routerPath;
+        this.uristring = builder.uristring;
     }
 
     static final class Builder<T> {
@@ -43,6 +47,7 @@ final class ServiceMethod<T> {
         int flag;
         Type returnType;
         String routerPath;
+        String uristring;
 
         Class clazz;
         Map<String, Object> params;
@@ -69,18 +74,22 @@ final class ServiceMethod<T> {
                 flag = flagInt.value();
             }
 
-            params = new HashMap<>();
             Annotation[][] parameterAnnotations = method.getParameterAnnotations();
-            for (int i = 0; i < parameterAnnotations.length; i++) {
-                Annotation[] annotations = parameterAnnotations[i];
-                if (annotations != null) {
-                    for (Annotation annotation : annotations) {
-                        if (annotation instanceof Extra) {
-                            String key = ((Extra) annotation).value();
-                            Object value = args[i];
-                            params.put(key, value);
-                        } else if (annotation instanceof RequestCode) {
-                            requestCode = (int) args[i];
+            if (parameterAnnotations != null) {
+                params = new HashMap<>();
+                for (int i = 0; i < parameterAnnotations.length; i++) {
+                    Annotation[] annotations = parameterAnnotations[i];
+                    if (annotations != null) {
+                        for (Annotation annotation : annotations) {
+                            if (annotation instanceof Extra) {
+                                String key = ((Extra) annotation).value();
+                                Object value = args[i];
+                                params.put(key, value);
+                            } else if (annotation instanceof RequestCode) {
+                                requestCode = (int) args[i];
+                            } else if (annotation instanceof Uri) {
+                                uristring = (String) args[i];
+                            }
                         }
                     }
                 }
