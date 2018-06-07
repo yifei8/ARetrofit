@@ -11,7 +11,7 @@ package com.sjtu.yifei.route;
 
 public interface AInterceptor {
 
-    void intercept(Chain chain);
+    void intercept(Chain chain) throws Exception;
 
     interface Chain {
 
@@ -20,5 +20,7 @@ public interface AInterceptor {
         ServiceMethod serviceMethod();
 
         boolean proceed();
+
+        void proceedResult(boolean result);
     }
 }

@@ -1,8 +1,6 @@
 package com.sjtu.yifei.route;
 
-import android.accounts.AccountAuthenticatorActivity;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -24,11 +22,12 @@ import java.util.Map;
 public class CallActivityAInterceptor implements AInterceptor {
 
     @Override
-    public void intercept(Chain chain) {
-        realExecute(chain.serviceMethod());
+    public void intercept(Chain chain) throws Exception {
+        boolean result = execute(chain.serviceMethod());
+        chain.proceedResult(result);
     }
 
-    private boolean realExecute(ServiceMethod<Object> serviceMethod) {
+    private boolean execute(ServiceMethod<Object> serviceMethod) {
         if (serviceMethod.clazz == null) {
             return false;
         }

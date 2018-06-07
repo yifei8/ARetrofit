@@ -1,5 +1,7 @@
 package com.sjtu.yifei.route;
 
+import android.util.Log;
+
 import java.util.List;
 
 /**
@@ -20,7 +22,13 @@ public class ActivityCall implements Call<Boolean> {
         List<AInterceptor> interceptors = RouteRegister.getInstance().getInterceptors();
         interceptors.add(new CallActivityAInterceptor());
         AInterceptor.Chain chain = new RealAInterceptorChain(interceptors, 0, serviceMethod);
-        return chain.proceed();
+        try {
+            return chain.proceed();
+        } catch (Exception e) {
+            Log.e("auto-api", e.getLocalizedMessage());
+            e.printStackTrace();
+            return false;
+        }
     }
 
 }
