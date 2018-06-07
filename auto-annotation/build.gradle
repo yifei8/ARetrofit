@@ -16,5 +16,5 @@ dependencies {
 
 //apply from: '../bintrayv1.gradle'
 //apply from: '../installv1.gradle'
-
-apply from: '../bintray.gradle'
+//
+//apply from: '../bintray.gradle'
