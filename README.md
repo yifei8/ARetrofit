@@ -94,6 +94,8 @@ public interface RouteService {
     boolean launchTest1Activity(@Extra("para1") String para1, @Extra("para2") int para2);
     @Go("/test-module1/Test1Activity")
     boolean launchTest1ActivityForResult(@Extra("para1") String para1, @Extra("para2") int para2, @RequestCode int requestCode);
+    //支持直接解析标准URL进行跳转 传入 注解@Uri 参数
+    boolean launchSchemeActivity(@Uri String uristring);
 
     //Fragment初始化，支持注解传入参数，参数解析遵循android机制
     @Go("/login-module/TestFragment")
