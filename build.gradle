@@ -50,7 +50,7 @@ task clean(type: Delete) {
 }
 
 ext {
-    auto_api = "0.1.0"
+    auto_api = "0.1.1"
     auto_annotation = "0.0.6"
     auto_complier = "0.0.7"
 }
