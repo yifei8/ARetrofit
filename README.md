@@ -9,7 +9,7 @@
 ### Github 源码: [ARetrofit](https://github.com/yifei8/ARetrofit)
 
 ## demo
-[demo apk 下载](https://github.com/yifei8/AndroidRetrofit/raw/master/app-release.apk)
+[demo apk 下载](https://github.com/yifei8/ARetrofit/raw/master/app-release.apk)
 
 ## 一 介绍
 从命名来看，做Android开发的小伙伴们感觉是不是似曾相识…是的，Retrofit，一款优秀的网络框架，目前正在被大量使用，相信大家对它的用法已经非常熟悉吧。
@@ -82,7 +82,7 @@ public class TestFragment extends Fragment {
     ...
 }
 ```
-### step3: 面向接口编程:AndroidRetrofit将Activity／Fragment 通信转化成接口
+### step3: 面向接口编程:ARetrofit将Activity／Fragment 通信转化成接口
 ```java
 /**
  * this interface in router-module
