@@ -51,6 +51,7 @@ dependencies {
 
     api project(':test-module1')
     api project(':login-module')
+    api project(':kotlin-module')
 
     annotationProcessor "com.sjtu.yifei:auto-complier:${rootProject.ext.auto_complier}"
 

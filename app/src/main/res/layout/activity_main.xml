@@ -71,10 +71,12 @@
             android:text="SchemeActivity \nin module(test-module1) " />
 
         <TextView
+            android:id="@+id/tv_kotlin"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center" />
+            android:gravity="center"
+            android:text="KotlinActivity \nin module(kotlin-module)"/>
     </LinearLayout>
 
 </LinearLayout>

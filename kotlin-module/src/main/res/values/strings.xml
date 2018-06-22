@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">kotlin-module</string>
+    <string name="title_activity_bottom_nav">BottomNavActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_activity_basic">BasicActivity</string>
+</resources>

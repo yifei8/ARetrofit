@@ -42,5 +42,11 @@ public interface RouteService {
     @Go("/login-module/ILoginProviderImpl")
     ILoginProvider getILoginProviderImpl(@Extra("param1") String para1, @Extra("param2") int para2);
 
+    @Go("/kotlin-module/BasicActivity")
+    boolean launchBasicActivity(@Extra("param1") String para1, @Extra("param2") int para2);
+
+    @Go("/kotlin-module/KotlinActivity")
+    boolean launchKotlinActivity();
+
     boolean launchSchemeActivity(@Uri String uristring);
 }

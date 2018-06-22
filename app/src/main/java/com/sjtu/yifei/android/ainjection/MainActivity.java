@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         TextView tv_test1_for_result = findViewById(R.id.tv_test1_for_result);
         TextView tv_fragment = findViewById(R.id.tv_fragment);
         TextView tv_scheme = findViewById(R.id.tv_scheme);
+        TextView tv_kotlin = findViewById(R.id.tv_kotlin);
         int[] i = new int[3];
         i[0]=1;
         i[1]=2;
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         tv_test2.setOnClickListener(v -> Routerfit.register(RouteService.class).launchTest2Activity("xxxx2", i));
         tv_fragment.setOnClickListener(v -> Routerfit.register(RouteService.class).launchFragmentActivity());
         tv_scheme.setOnClickListener(v -> Routerfit.register(RouteService.class).launchSchemeActivity("protocol://yifei.sjtu.com:8080/aretrofit?id=10011002"));
+        tv_kotlin.setOnClickListener(v -> Routerfit.register(RouteService.class).launchBasicActivity("from mainactivity", 1002));
     }
 
     @Override
