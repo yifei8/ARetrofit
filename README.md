@@ -28,6 +28,7 @@ ARetrofit一款优秀的Android组件化框架（皮一下^_^开心），可以�
 - 支持MultiDex(Google方案)
 - 页面、拦截器、服务等组件均自动注册到框架
 - 支持获取Fragment
+- 支持Kotlin混编
 - 跨进程通信（待完善～）如有IPC业务可参考[ABridge 进程间通信最牛方案](https://www.jianshu.com/p/46134eef5703)
 
 特点：
