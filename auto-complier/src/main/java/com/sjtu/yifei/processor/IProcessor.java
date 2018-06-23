@@ -97,7 +97,6 @@ public class IProcessor extends AbstractProcessor {
                     String autoGenerateClass = "com.sjtu.yifei." + RandomStringUtils.randomAlphabetic(10);
                     generateAInterceptorInject.generateAInterceptorInjectImpl(autoGenerateClass);
                     logger.info(">>> Apt interceptor Processor succeed <<<");
-                    return true;
                 }
 
                 Set<? extends Element> routeElements = roundEnvironment.getElementsAnnotatedWith(Route.class);
@@ -124,13 +123,11 @@ public class IProcessor extends AbstractProcessor {
                     String autoGenerateClass = "com.sjtu.yifei." + RandomStringUtils.randomAlphabetic(10);
                     generateRouteInject.generateRouteInjectImpl(autoGenerateClass);
                     logger.info(">>> Apt route Processor succeed <<<");
-                    return true;
                 }
             } catch (Exception e) {
                 logger.error(e);
                 logger.error(">>> --- Apt route Processor failed <<<");
             }
-
             return true;
         }
         return false;
