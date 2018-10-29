@@ -58,5 +58,5 @@ task clean(type: Delete) {
 ext {
     auto_api = "0.1.3"
     auto_annotation = "0.0.8"
-    auto_complier = "0.0.8"
+    auto_complier = "0.0.9"
 }

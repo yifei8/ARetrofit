@@ -203,10 +203,6 @@ public class LoginInterceptor implements AInterceptor {
 
 ![qq交流群.jpeg](https://user-gold-cdn.xitu.io/2018/6/5/163cea15e497ee16?w=200&h=274&f=jpeg&s=15655)
 
-#### 微信群
-
-![微信群.jpeg](https://user-gold-cdn.xitu.io/2018/6/5/163cea15e51a136a?w=200&h=266&f=jpeg&s=14284)
-
 #### Email
 
 iyifei8@gmail.com
