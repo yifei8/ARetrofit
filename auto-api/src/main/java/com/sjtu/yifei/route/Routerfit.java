@@ -2,6 +2,7 @@ package com.sjtu.yifei.route;
 
 import android.app.Activity;
 import android.app.Application;
+import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -25,6 +26,10 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public final class Routerfit {
     private static final String TAG = "Routerfit";
+    /** Standard activity result: operation canceled. */
+    public static final int RESULT_CANCELED    = 0;
+    /** Standard activity result: operation succeeded. */
+    public static final int RESULT_OK           = -1;
 
     private final Map<Method, ServiceMethod<?>> serviceMethodCache = new ConcurrentHashMap<>();
 
@@ -133,5 +138,10 @@ public final class Routerfit {
             return new Routerfit();
         }
     }
+
+    public static void setResult(@IntRange(from = 0, to = 1) int result, Object data) {
+        ActivityCallBackManager.getInstance().callback.onActivityResult(result, data);
+    }
+
 
 }

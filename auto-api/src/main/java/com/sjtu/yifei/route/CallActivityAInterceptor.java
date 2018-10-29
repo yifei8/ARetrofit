@@ -90,6 +90,8 @@ public class CallActivityAInterceptor implements AInterceptor {
             if (serviceMethod.flag > 0) {
                 intent.addFlags(serviceMethod.flag);
             }
+            ActivityCallBackManager.getInstance().callback = serviceMethod.callback;
+            // TODO: 2018/10/29 使用map管理声明周期
             if (serviceMethod.requestCode > 0) {
                 activity.startActivityForResult(intent, serviceMethod.requestCode);
             } else {

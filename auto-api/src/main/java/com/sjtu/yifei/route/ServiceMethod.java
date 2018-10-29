@@ -29,7 +29,7 @@ final class ServiceMethod<T> {
     final Type returnType;
     final String routerPath;
     final String uristring;
-
+    final ActivityCallback callback;
 
     ServiceMethod(Builder<T> builder) {
         this.clazz = builder.clazz;
@@ -39,6 +39,7 @@ final class ServiceMethod<T> {
         this.returnType = builder.returnType;
         this.routerPath = builder.routerPath;
         this.uristring = builder.uristring;
+        this.callback = builder.callback;
     }
 
     static final class Builder<T> {
@@ -52,6 +53,7 @@ final class ServiceMethod<T> {
         Class clazz;
         Map<String, Object> params;
         int requestCode;
+        ActivityCallback callback;
 
         Builder(Method method, Object[] args) {
             this.method = method;
@@ -84,7 +86,11 @@ final class ServiceMethod<T> {
                             if (annotation instanceof Extra) {
                                 String key = ((Extra) annotation).value();
                                 Object value = args[i];
-                                params.put(key, value);
+                                if (value instanceof ActivityCallback) {
+                                    callback = (ActivityCallback) value;
+                                } else {
+                                    params.put(key, value);
+                                }
                             } else if (annotation instanceof RequestCode) {
                                 requestCode = (int) args[i];
                             } else if (annotation instanceof Uri) {
