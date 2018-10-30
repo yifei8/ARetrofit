@@ -19,6 +19,7 @@ ARetrofit一款优秀的Android组件化框架（皮一下^_^开心），可以�
 如果你正在对项目进行组件化，ARetrofit将是不二选择。
 
 ## 二 功能介绍
+- 新增ActivityCallback,通过配置一个参数实现Activity回调，且可以回传任意参数，告别onActivityResult繁琐写法，使用更灵活
 - 支持直接解析标准URL进行跳转
 - 支持跨module通信
 - 支持添加多个拦截器，自定义拦截顺序
@@ -120,7 +121,52 @@ private void launchTest1Activity(String para1, int para2) {
 -keep class * implements com.sjtu.yifei.ioc.**{*;}
 -keep class * implements com.sjtu.yifei.annotation.AutoRegisterContract{*;}
 ```
-## 三 高阶用法
+## 三支持ActivityCallback，告别onActivityResult,使得代码更加简洁灵活
+如登录回调
+### step1:注册登录接口
+```java
+
+public interface RouteService {
+    ...
+    //通过配置ActivityCallback参数实现Activity回调
+    @Go("/login-module/LoginActivity")
+    boolean launchLoginActivity(@Extra ActivityCallback callback);
+}
+
+```
+### step2:登录回调操作（优雅的实现登录回调）
+```java
+
+@Interceptor(priority = 3)
+public class LoginInterceptor implements AInterceptor {
+
+    private static final String TAG = "LoginInterceptor";
+    @Override
+    public void intercept(final Chain chain) {
+        //Test2Activity 需要登录
+        if ("/login-module/Test2Activity".equalsIgnoreCase(chain.path())) {
+            Routerfit.register(RouteService.class).launchLoginActivity(new ActivityCallback() {
+                @Override
+                public void onActivityResult(int i, Object data) {
+                    if (i == Routerfit.RESULT_OK) {//登录成功后继续执行
+                        Toast.makeText(ActivityLifecycleMonitor.getTopActivityOrApp(), "登录成功", Toast.LENGTH_LONG).show();
+                        chain.proceed();
+                    } else {
+                        Toast.makeText(ActivityLifecycleMonitor.getTopActivityOrApp(), "登录取消/失败", Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+        } else {
+            chain.proceed();
+        }
+    }
+
+}
+
+```
+
+
+## 四 高阶用法
 - 以登录组件为例
 ### step1 声明登录服务
 ```java
@@ -198,7 +244,7 @@ public class LoginInterceptor implements AInterceptor {
     }
 }
 ```
-## 四 沟通交流
+## 五 沟通交流
 #### qq群
 
 ![qq交流群.jpeg](https://user-gold-cdn.xitu.io/2018/6/5/163cea15e497ee16?w=200&h=274&f=jpeg&s=15655)
@@ -209,7 +255,7 @@ iyifei8@gmail.com
 
 644912187@qq.com
 
-## 五 欢迎 fork、issues
+## 六 欢迎 fork、issues
 
 
 
