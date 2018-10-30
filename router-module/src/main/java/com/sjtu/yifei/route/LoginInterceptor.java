@@ -4,7 +4,6 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.sjtu.yifei.annotation.Interceptor;
-import com.sjtu.yifei.util.ActivityLifecycleMonitor;
 
 /**
  * 类描述：
@@ -20,15 +19,22 @@ public class LoginInterceptor implements AInterceptor {
     private static final String TAG = "LoginInterceptor";
 
     @Override
-    public void intercept(Chain chain) {
+    public void intercept(final Chain chain) {
         Log.e(TAG,"path:" + chain.path());
         //Test2Activity 需要登录
         if ("/login-module/Test2Activity".equalsIgnoreCase(chain.path())) {
             Toast.makeText(ActivityLifecycleMonitor.getTopActivityOrApp(), "Test2Activity 需要登录", Toast.LENGTH_SHORT).show();
-            ILoginProvider iProvider = Routerfit.register(RouteService.class).getILoginProviderImpl("provider from login-module", 10001);
-            if (iProvider != null) {
-                iProvider.login();
-            }
+            Routerfit.register(RouteService.class).launchLoginActivity(new ActivityCallback() {
+                @Override
+                public void onActivityResult(int i, Object o) {
+                    if (i == Routerfit.RESULT_OK) {
+                        Toast.makeText(ActivityLifecycleMonitor.getTopActivityOrApp(), "result:" + i + ",登录成功 data:" + o, Toast.LENGTH_LONG).show();
+                        chain.proceed();//登录成功后继续执行
+                    } else {
+                        Toast.makeText(ActivityLifecycleMonitor.getTopActivityOrApp(), "result:" + i + ", 登录取消", Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
         } else {
             chain.proceed();
         }

@@ -30,7 +30,13 @@ public class MainActivity extends AppCompatActivity {
         i[1]=2;
         i[2]=3;
 
-        tv_test1.setOnClickListener(v -> Routerfit.register(RouteService.class).launchTest1Activity("MainActivity ", 100));
+        tv_test1.setOnClickListener(v ->
+                Routerfit.register(RouteService.class)
+                        .launchTest1Activity("MainActivity ", 100,
+                                (i1, o) ->
+                                        Toast.makeText(MainActivity.this, "i:" + i1, Toast.LENGTH_LONG).show()
+                        ));
+
         tv_test1_for_result.setOnClickListener(v -> Routerfit.register(RouteService.class).launchTest1ActivityForResult("MainActivity for result", 100, REQUEST_CODE_TEST1));
         tv_test2.setOnClickListener(v -> Routerfit.register(RouteService.class).launchTest2Activity("xxxx2", i));
         tv_fragment.setOnClickListener(v -> Routerfit.register(RouteService.class).launchFragmentActivity());

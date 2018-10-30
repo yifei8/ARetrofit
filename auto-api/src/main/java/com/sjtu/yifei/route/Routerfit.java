@@ -138,10 +138,15 @@ public final class Routerfit {
         }
     }
 
-    public static void setResult(@IntRange(from = 0, to = 1) int result, Object data) {
+    public static void setResult(@IntRange(from = -1, to = 0) int result, Object data) {
         Activity activity = ActivityLifecycleMonitor.getTopActivity();
         if (activity != null) {
-            ActivityCallBackManager.getInstance().map.get(activity.getLocalClassName()).onActivityResult(result, data);
+            String key = activity.getLocalClassName();
+            ActivityCallback callback = ActivityCallBackManager.getInstance().map.get(key);
+            if (callback != null) {
+                ActivityCallBackManager.getInstance().map.remove(key);
+                callback.onActivityResult(result, data);
+            }
         }
     }
 

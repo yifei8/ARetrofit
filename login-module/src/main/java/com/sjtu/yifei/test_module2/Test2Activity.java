@@ -8,8 +8,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sjtu.yifei.annotation.Route;
+import com.sjtu.yifei.route.ActivityCallback;
 import com.sjtu.yifei.route.RouteService;
 import com.sjtu.yifei.route.Routerfit;
 
@@ -44,7 +46,12 @@ public class Test2Activity extends AppCompatActivity {
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Routerfit.register(RouteService.class).launchTest1Activity("from Test2Activity", 100);
+                Routerfit.register(RouteService.class).launchTest1Activity("from Test2Activity", 100, new ActivityCallback() {
+                    @Override
+                    public void onActivityResult(int i, Object o) {
+                        Toast.makeText(Test2Activity.this, "i:" + i + ", data:" + o, Toast.LENGTH_LONG).show();
+                    }
+                });
             }
         });
     }

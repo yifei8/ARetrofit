@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.sjtu.yifei.annotation.Route;
+import com.sjtu.yifei.route.Routerfit;
 
 @Route(path = "/test-module1/Test1Activity")
 public class Test1Activity extends AppCompatActivity {
@@ -34,6 +35,7 @@ public class Test1Activity extends AppCompatActivity {
 
         Button button = findViewById(R.id.tv_finish);
         button.setOnClickListener(v -> {
+            Routerfit.setResult(Routerfit.RESULT_OK, "");
             Intent result = new Intent();
             result.putExtra("result_para", "this is test set result ok");
             setResult(RESULT_OK, result);

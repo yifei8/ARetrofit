@@ -22,7 +22,7 @@ public interface RouteService {
 
     @Flags(Intent.FLAG_ACTIVITY_NEW_TASK)
     @Go("/test-module1/Test1Activity")
-    boolean launchTest1Activity(@Extra("para1") String para1, @Extra("para2") int para2);
+    boolean launchTest1Activity(@Extra("para1") String para1, @Extra("para2") int para2, @Extra ActivityCallback callback);
 
     @Go("/test-module1/Test1Activity")
     boolean launchTest1ActivityForResult(@Extra("para1") String para1, @Extra("para2") int para2, @RequestCode int requestCode);
@@ -34,7 +34,7 @@ public interface RouteService {
     boolean launchTest2Activity(@Extra("para1") String para1, @Extra("para2") int[] para2);
 
     @Go("/login-module/LoginActivity")
-    boolean launchLoginActivity();
+    boolean launchLoginActivity(@Extra ActivityCallback callback);
 
     @Go("/login-module/TestFragment")
     Fragment getTestFragment(@Extra("param1") String para1, @Extra("param2") int[] para2);

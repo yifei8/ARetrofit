@@ -27,7 +27,7 @@ public class ILoginProviderImpl implements ILoginProvider {
 
     @Override
     public String login() {
-        Routerfit.register(RouteService.class).launchLoginActivity();
+        Routerfit.register(RouteService.class).launchLoginActivity(null);
         return "ILoginProviderImpl para1:" + para1 + ",para2:" + para2;
     }
 }
