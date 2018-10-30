@@ -1,4 +1,4 @@
-package com.sjtu.yifei.util;
+package com.sjtu.yifei.route;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -64,6 +64,12 @@ public final class ActivityLifecycleMonitor {
 
         @Override
         public void onActivityDestroyed(Activity activity) {
+            String key = activity.getLocalClassName();
+            ActivityCallback callback = ActivityCallBackManager.getInstance().map.get(key);
+            if (callback != null) {
+                callback.onActivityResult(Routerfit.RESULT_CANCELED, null);
+                ActivityCallBackManager.getInstance().map.remove(key);
+            }
             ACTIVITY_LIST.remove(activity);
         }
     };

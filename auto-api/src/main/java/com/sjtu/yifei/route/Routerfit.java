@@ -10,7 +10,6 @@ import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.sjtu.yifei.exception.RouteNotFoundException;
-import com.sjtu.yifei.util.ActivityLifecycleMonitor;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -140,7 +139,10 @@ public final class Routerfit {
     }
 
     public static void setResult(@IntRange(from = 0, to = 1) int result, Object data) {
-        ActivityCallBackManager.getInstance().callback.onActivityResult(result, data);
+        Activity activity = ActivityLifecycleMonitor.getTopActivity();
+        if (activity != null) {
+            ActivityCallBackManager.getInstance().map.get(activity.getLocalClassName()).onActivityResult(result, data);
+        }
     }
 
 

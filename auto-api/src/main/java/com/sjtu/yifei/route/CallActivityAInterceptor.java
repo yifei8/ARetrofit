@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 
-import com.sjtu.yifei.util.ActivityLifecycleMonitor;
-
 import java.io.Serializable;
 import java.util.Map;
 
@@ -90,8 +88,7 @@ public class CallActivityAInterceptor implements AInterceptor {
             if (serviceMethod.flag > 0) {
                 intent.addFlags(serviceMethod.flag);
             }
-            ActivityCallBackManager.getInstance().callback = serviceMethod.callback;
-            // TODO: 2018/10/29 使用map管理声明周期
+            ActivityCallBackManager.getInstance().map.put(activity.getLocalClassName(), serviceMethod.callback);
             if (serviceMethod.requestCode > 0) {
                 activity.startActivityForResult(intent, serviceMethod.requestCode);
             } else {

@@ -2,6 +2,9 @@ package com.sjtu.yifei.route;
 
 import android.support.annotation.IntRange;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 类描述：
  * 创建人：yifei
@@ -14,11 +17,12 @@ final class ActivityCallBackManager {
     private static ActivityCallBackManager ourInstance;
 
     // TODO: 2018/10/29 改用map管理声明周期
-    ActivityCallback callback;
+    Map<String, ActivityCallback> map;
 
     static ActivityCallBackManager getInstance() {
         if (ourInstance == null) {
             ourInstance = new ActivityCallBackManager();
+            ourInstance.map = new HashMap<>();
         }
         return ourInstance;
     }
@@ -26,9 +30,10 @@ final class ActivityCallBackManager {
     private ActivityCallBackManager() {
     }
 
-    void setResult(@IntRange(from = 0, to = 1) int result, Object data) {
+    void setResult(String key,@IntRange(from = 0, to = 1) int result, Object data) {
+        ActivityCallback callback = map.get(key);
         callback.onActivityResult(result, data);
-        callback = null;
+        map.remove(key);
     }
 
 }

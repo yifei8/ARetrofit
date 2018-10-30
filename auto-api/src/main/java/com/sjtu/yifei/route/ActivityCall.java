@@ -8,8 +8,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.sjtu.yifei.util.ActivityLifecycleMonitor;
-
 import java.util.List;
 
 /**
