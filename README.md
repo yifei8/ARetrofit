@@ -134,7 +134,12 @@ public interface RouteService {
 }
 
 ```
-### step2:登录回调操作（优雅的实现登录回调）
+### step2:再登录成功的地方设置状态
+```
+//Routerfit.RESULT_OK 表示回调成功 ，不调用表示取消／回调失败
+Routerfit.setResult(Routerfit.RESULT_OK, "")
+```
+### step3:登录回调操作（优雅的实现登录回调）
 ```java
 
 @Interceptor(priority = 3)
