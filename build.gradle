@@ -3,6 +3,7 @@
 buildscript {
     ext.kotlin_version = '1.2.10'
     repositories {
+        maven { url rootProject.file("repo-api") }
         maven {
             //一般 Add to JCenter会有审核延迟, 此时还没有添加到Jcenter中
             //在未审核通过之前，可以这样使用自己的maven仓库：
@@ -28,14 +29,14 @@ buildscript {
 
 allprojects {
     repositories {
+        maven { url rootProject.file("repo-api") }
+//        maven { url rootProject.file("repo-annotation") }
+//        maven { url rootProject.file("repo-complier") }
         maven {
             //一般 Add to JCenter会有审核延迟, 此时还没有添加到Jcenter中
             //在未审核通过之前，可以这样使用自己的maven仓库：
             url 'https://dl.bintray.com/iyifei/maven/'
         }
-//        maven { url rootProject.file("repo-api") }
-//        maven { url rootProject.file("repo-annotation") }
-//        maven { url rootProject.file("repo-complier") }
         maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
         mavenCentral()
         maven { url "https://jitpack.io" }
@@ -56,7 +57,7 @@ task clean(type: Delete) {
 }
 
 ext {
-    auto_api = "1.0.0"
+    auto_api = "1.0.1"
     auto_annotation = "0.0.8"
     auto_complier = "0.0.9"
 }

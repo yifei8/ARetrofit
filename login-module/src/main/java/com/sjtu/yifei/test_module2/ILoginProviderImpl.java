@@ -1,5 +1,7 @@
 package com.sjtu.yifei.test_module2;
 
+import android.app.Application;
+
 import com.sjtu.yifei.annotation.Route;
 import com.sjtu.yifei.route.ILoginProvider;
 import com.sjtu.yifei.route.RouteService;
@@ -19,15 +21,17 @@ public class ILoginProviderImpl implements ILoginProvider {
 
     private String para1;
     private int para2;
+    private Application application;
 
-    public ILoginProviderImpl(String para1, int para2) {
+    public ILoginProviderImpl(String para1, int para2, Application application) {
         this.para1 = para1;
         this.para2 = para2;
+        this.application = application;
     }
 
     @Override
     public String login() {
         Routerfit.register(RouteService.class).launchLoginActivity(null);
-        return "ILoginProviderImpl para1:" + para1 + ",para2:" + para2;
+        return "ILoginProviderImpl para1:" + para1 + ",para2:" + para2 + ",para3:" + application.getPackageCodePath();
     }
 }

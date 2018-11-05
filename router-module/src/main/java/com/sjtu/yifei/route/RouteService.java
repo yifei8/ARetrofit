@@ -1,5 +1,6 @@
 package com.sjtu.yifei.route;
 
+import android.app.Application;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 
@@ -40,7 +41,7 @@ public interface RouteService {
     Fragment getTestFragment(@Extra("param1") String para1, @Extra("param2") int[] para2);
 
     @Go("/login-module/ILoginProviderImpl")
-    ILoginProvider getILoginProviderImpl(@Extra("param1") String para1, @Extra("param2") int para2);
+    ILoginProvider getILoginProviderImpl(@Extra("param1") String para1, @Extra("param2") int para2, @Extra("application") Application application);
 
     @Go("/kotlin-module/BasicActivity")
     boolean launchBasicActivity(@Extra("param1") String para1, @Extra("param2") int para2);

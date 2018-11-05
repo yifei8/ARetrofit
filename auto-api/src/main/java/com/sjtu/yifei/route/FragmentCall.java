@@ -49,26 +49,6 @@ public class FragmentCall implements Call {
                         bundle.putBoolean(key, (Boolean) val);
                     } else if (val instanceof String) {
                         bundle.putString(key, (String) val);
-                    } else if (val instanceof Serializable) {
-                        bundle.putSerializable(key, (Serializable) val);
-                    } else if (val instanceof Parcelable) {
-                        bundle.putParcelable(key, (Parcelable) val);
-                    } else if (val instanceof CharSequence) {
-                        bundle.putCharSequence(key, (CharSequence) val);
-                    } else if (val instanceof Integer[]) {
-                        bundle.putIntArray(key, (int[]) val);
-                    } else if (val instanceof Double[]) {
-                        bundle.putDoubleArray(key, (double[]) val);
-                    } else if (val instanceof Byte[]) {
-                        bundle.putByteArray(key, (byte[]) val);
-                    } else if (val instanceof Short[]) {
-                        bundle.putShortArray(key, (short[]) val);
-                    } else if (val instanceof Long[]) {
-                        bundle.putLongArray(key, (long[]) val);
-                    } else if (val instanceof Float[]) {
-                        bundle.putFloatArray(key, (float[]) val);
-                    } else if (val instanceof Boolean[]) {
-                        bundle.putBooleanArray(key, (boolean[]) val);
                     } else if (val instanceof String[]) {
                         bundle.putStringArray(key, (String[]) val);
                     } else if (val instanceof Parcelable[]) {
@@ -77,6 +57,12 @@ public class FragmentCall implements Call {
                         bundle.putCharSequenceArray(key, (CharSequence[]) val);
                     } else if (val instanceof Bundle) {
                         bundle.putBundle(key, (Bundle) val);
+                    } else if (val instanceof Serializable) {
+                        bundle.putSerializable(key, (Serializable) val);
+                    } else if (val instanceof Parcelable) {
+                        bundle.putParcelable(key, (Parcelable) val);
+                    } else if (val instanceof CharSequence) {
+                        bundle.putCharSequence(key, (CharSequence) val);
                     }
                 }
                 fragment.setArguments(bundle);
@@ -103,26 +89,6 @@ public class FragmentCall implements Call {
                         bundle.putBoolean(key, (Boolean) val);
                     } else if (val instanceof String) {
                         bundle.putString(key, (String) val);
-                    } else if (val instanceof Serializable) {
-                        bundle.putSerializable(key, (Serializable) val);
-                    } else if (val instanceof Parcelable) {
-                        bundle.putParcelable(key, (Parcelable) val);
-                    } else if (val instanceof CharSequence) {
-                        bundle.putCharSequence(key, (CharSequence) val);
-                    } else if (val instanceof Integer[]) {
-                        bundle.putIntArray(key, (int[]) val);
-                    } else if (val instanceof Double[]) {
-                        bundle.putDoubleArray(key, (double[]) val);
-                    } else if (val instanceof Byte[]) {
-                        bundle.putByteArray(key, (byte[]) val);
-                    } else if (val instanceof Short[]) {
-                        bundle.putShortArray(key, (short[]) val);
-                    } else if (val instanceof Long[]) {
-                        bundle.putLongArray(key, (long[]) val);
-                    } else if (val instanceof Float[]) {
-                        bundle.putFloatArray(key, (float[]) val);
-                    } else if (val instanceof Boolean[]) {
-                        bundle.putBooleanArray(key, (boolean[]) val);
                     } else if (val instanceof String[]) {
                         bundle.putStringArray(key, (String[]) val);
                     } else if (val instanceof Parcelable[]) {
@@ -131,6 +97,12 @@ public class FragmentCall implements Call {
                         bundle.putCharSequenceArray(key, (CharSequence[]) val);
                     } else if (val instanceof Bundle) {
                         bundle.putBundle(key, (Bundle) val);
+                    } else if (val instanceof Serializable) {
+                        bundle.putSerializable(key, (Serializable) val);
+                    } else if (val instanceof Parcelable) {
+                        bundle.putParcelable(key, (Parcelable) val);
+                    } else if (val instanceof CharSequence) {
+                        bundle.putCharSequence(key, (CharSequence) val);
                     }
                 }
                 fragment.setArguments(bundle);

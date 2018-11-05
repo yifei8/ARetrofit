@@ -1,5 +1,6 @@
 package com.sjtu.yifei.route;
 
+import android.app.Application;
 import android.os.Parcelable;
 import android.util.Log;
 
@@ -15,11 +16,10 @@ import java.util.Map;
  * 修改时间：
  * 修改备注：
  */
-
 public class IProviderCall<T> implements Call<T> {
     private final ServiceMethod<Object> serviceMethod;
 
-    public IProviderCall(ServiceMethod<Object> serviceMethod) {
+    IProviderCall(ServiceMethod<Object> serviceMethod) {
         this.serviceMethod = serviceMethod;
     }
 
@@ -56,13 +56,18 @@ public class IProviderCall<T> implements Call<T> {
                     parameterTypes[i] = Serializable.class;
                 } else if (val instanceof Parcelable) {
                     parameterTypes[i] = Parcelable.class;
+                } else if (val instanceof Application) {
+                    parameterTypes[i] = Application.class;
+                } else {
+                    Class aClass = val.getClass();
+                    Log.i("IProviderCall", "不支持的参数类的名称是:" + aClass.getName());
                 }
                 i++;
             }
             Constructor constructor = serviceMethod.clazz.getConstructor(parameterTypes);
             result = (T) constructor.newInstance(vals);
         } catch (Exception e) {
-            Log.e("auto-api", "" + e.getMessage());
+            Log.e("IProviderCall", "Exception:" + e.getMessage());
             e.printStackTrace();
             try {
                 result = (T) serviceMethod.clazz.newInstance();

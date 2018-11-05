@@ -51,12 +51,6 @@ public class CallActivityAInterceptor implements AInterceptor {
                     intent.putExtra(key, (Boolean) val);
                 } else if (val instanceof String) {
                     intent.putExtra(key, (String) val);
-                } else if (val instanceof Serializable) {
-                    intent.putExtra(key, (Serializable) val);
-                } else if (val instanceof Parcelable) {
-                    intent.putExtra(key, (Parcelable) val);
-                } else if (val instanceof CharSequence) {
-                    intent.putExtra(key, (CharSequence) val);
                 } else if (val instanceof Integer[]) {
                     intent.putExtra(key, (Integer[]) val);
                 } else if (val instanceof Double[]) {
@@ -83,6 +77,12 @@ public class CallActivityAInterceptor implements AInterceptor {
                     intent.putExtras((Intent) val);
                 } else if (val instanceof Bundle) {
                     intent.putExtras((Bundle) val);
+                } else if (val instanceof Serializable) {
+                    intent.putExtra(key, (Serializable) val);
+                } else if (val instanceof Parcelable) {
+                    intent.putExtra(key, (Parcelable) val);
+                } else if (val instanceof CharSequence) {
+                    intent.putExtra(key, (CharSequence) val);
                 }
             }
             if (serviceMethod.flag > 0) {
