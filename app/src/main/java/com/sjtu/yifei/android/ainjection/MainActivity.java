@@ -26,9 +26,9 @@ public class MainActivity extends AppCompatActivity {
         TextView tv_scheme = findViewById(R.id.tv_scheme);
         TextView tv_kotlin = findViewById(R.id.tv_kotlin);
         int[] i = new int[3];
-        i[0]=1;
-        i[1]=2;
-        i[2]=3;
+        i[0] = 1;
+        i[1] = 2;
+        i[2] = 3;
 
         tv_test1.setOnClickListener(v ->
                 Routerfit.register(RouteService.class)

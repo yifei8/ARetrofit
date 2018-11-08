@@ -60,7 +60,7 @@ public class IProviderCall<T> implements Call<T> {
                     parameterTypes[i] = Application.class;
                 } else {
                     Class aClass = val.getClass();
-                    Log.i("IProviderCall", "不支持的参数类的名称是:" + aClass.getName());
+                    parameterTypes[i] = aClass;
                 }
                 i++;
             }

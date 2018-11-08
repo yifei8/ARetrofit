@@ -11,7 +11,7 @@ import com.sjtu.yifei.annotation.Uri;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -51,7 +51,7 @@ final class ServiceMethod<T> {
         String uristring;
 
         Class clazz;
-        Map<String, Object> params;
+        LinkedHashMap<String, Object> params;
         int requestCode;
         ActivityCallback callback;
 
@@ -78,7 +78,7 @@ final class ServiceMethod<T> {
 
             Annotation[][] parameterAnnotations = method.getParameterAnnotations();
             if (parameterAnnotations != null) {
-                params = new HashMap<>();
+                params = new LinkedHashMap<>();
                 for (int i = 0; i < parameterAnnotations.length; i++) {
                     Annotation[] annotations = parameterAnnotations[i];
                     if (annotations != null) {
