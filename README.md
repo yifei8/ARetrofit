@@ -121,7 +121,7 @@ private void launchTest1Activity(String para1, int para2) {
 -keep class * implements com.sjtu.yifei.ioc.**{*;}
 -keep class * implements com.sjtu.yifei.annotation.AutoRegisterContract{*;}
 ```
-## 三支持ActivityCallback，告别onActivityResult,使得代码更加简洁灵活
+## 三 支持ActivityCallback，告别onActivityResult,使得代码更加简洁灵活
 如登录回调
 ### step1:注册登录接口
 ```java
@@ -134,7 +134,13 @@ public interface RouteService {
 }
 
 ```
-### step2:登录回调操作（优雅的实现登录回调）
+### step2:在登录成功的地方设置状态
+```
+//result:Routerfit.RESULT_OK 表示回调成功 ，不调用表示取消／回调失败
+//data: obj 可以是任意需要传递的对象
+Routerfit.setResult(Routerfit.RESULT_OK, obj)
+```
+### step3:登录回调操作（优雅的实现登录回调）
 ```java
 
 @Interceptor(priority = 3)
