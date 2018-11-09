@@ -16,8 +16,7 @@ import java.util.Map;
 final class ActivityCallBackManager {
     private static ActivityCallBackManager ourInstance;
 
-    // TODO: 2018/10/29 改用map管理声明周期
-    Map<String, ActivityCallback> map;
+    private Map<String, ActivityCallback> map;
 
     static ActivityCallBackManager getInstance() {
         if (ourInstance == null) {
@@ -30,10 +29,18 @@ final class ActivityCallBackManager {
     private ActivityCallBackManager() {
     }
 
-    void setResult(String key,@IntRange(from = 0, to = 1) int result, Object data) {
+    void putCallBack(String key, ActivityCallback callback) {
+        if (callback != null) {
+            map.put(key, callback);
+        }
+    }
+
+    void setResult(String key, @IntRange(from = -1, to = 0) int result, Object data) {
         ActivityCallback callback = map.get(key);
-        callback.onActivityResult(result, data);
-        map.remove(key);
+        if (callback != null) {
+            callback.onActivityResult(result, data);
+            map.remove(key);
+        }
     }
 
 }

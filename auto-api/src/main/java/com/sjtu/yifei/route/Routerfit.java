@@ -142,10 +142,9 @@ public final class Routerfit {
         Activity activity = ActivityLifecycleMonitor.getTopActivity();
         if (activity != null) {
             String key = activity.getLocalClassName();
-            ActivityCallback callback = ActivityCallBackManager.getInstance().map.get(key);
-            if (callback != null) {
-                ActivityCallBackManager.getInstance().map.remove(key);
-                callback.onActivityResult(result, data);
+            if (ActivityLifecycleMonitor.getSecondLastActivity() != null) {
+                String lastActivityHash = String.valueOf(ActivityLifecycleMonitor.getSecondLastActivity().hashCode());
+                ActivityCallBackManager.getInstance().setResult(lastActivityHash + key, result, data);
             }
         }
     }
