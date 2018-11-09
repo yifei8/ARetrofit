@@ -65,12 +65,11 @@ public final class ActivityLifecycleMonitor {
         @Override
         public void onActivityDestroyed(Activity activity) {
             String key = activity.getLocalClassName();
-            ActivityCallback callback = ActivityCallBackManager.getInstance().map.get(key);
-            if (callback != null) {
-                callback.onActivityResult(Routerfit.RESULT_CANCELED, null);
-                ActivityCallBackManager.getInstance().map.remove(key);
-            }
             ACTIVITY_LIST.remove(activity);
+            if (ACTIVITY_LIST.size() > 0) {
+                String lastActivityHash = String.valueOf(ACTIVITY_LIST.getLast().hashCode());
+                ActivityCallBackManager.getInstance().setResult(lastActivityHash + key, Routerfit.RESULT_CANCELED, "cancel");
+            }
         }
     };
 
@@ -156,6 +155,16 @@ public final class ActivityLifecycleMonitor {
             }
         }
         return false;
+    }
+
+    static Activity getSecondLastActivity() {
+        if (!ACTIVITY_LIST.isEmpty() && ACTIVITY_LIST.size() >= 2) {
+            final Activity topActivity = ACTIVITY_LIST.get(ACTIVITY_LIST.size() - 2);
+            if (topActivity != null) {
+                return topActivity;
+            }
+        }
+        return null;
     }
 
     public static Activity getTopActivity() {
