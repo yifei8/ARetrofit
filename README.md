@@ -39,10 +39,15 @@ ARetrofit一款优秀的Android组件化框架（皮一下^_^开心），可以�
 ### step1: 添加依赖和配置
  ``` gradle
 //module gradle file
+//kotlin 需要添加插件
+apply plugin: 'kotlin-kapt'
+
 dependencies {
     ...
-    annotationProcessor "com.sjtu.yifei:auto-complier:x.x.x"
-    api "com.sjtu.yifei:auto-api:x.x.x"
+    annotationProcessor "com.sjtu.yifei:auto-complier:0.0.9"
+    //kotlin使用kapt插件
+    kapt "com.sjtu.yifei:auto-complier:0.0.9"
+    api "com.sjtu.yifei:auto-api:1.0.2"
 }
 
 //project gradle file
@@ -54,7 +59,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.1'
         //Gradle 插件实现路由表的自动加载
-        classpath "com.sjtu.yifei:auto-inject:x.x.x"
+        classpath "com.sjtu.yifei:auto-inject:0.0.5"
     }
 }
 
