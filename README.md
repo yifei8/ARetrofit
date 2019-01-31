@@ -2,7 +2,7 @@
 
 模块|auto-api|auto-complier|auto-inject
 ---|---|---|---
-最新版本  |   [![Download](https://api.bintray.com/packages/iyifei/maven/auto-api/images/download.svg)](https://bintray.com/iyifei/maven/auto-api/_latestVersion)  |  [![Download](https://api.bintray.com/packages/iyifei/maven/auto-complier/images/download.svg)](https://bintray.com/iyifei/maven/auto-complier/_latestVersion)  |  [![Download](https://api.bintray.com/packages/iyifei/maven/auto-inject/images/download.svg)](https://bintray.com/iyifei/maven/auto-inject/_latestVersion)
+最新版本  |1.0.1| 0.0.9 | 0.0.5
 
 > Android组件化超级路由，为简单而生。
 
