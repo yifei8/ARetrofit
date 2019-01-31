@@ -2,7 +2,7 @@
 
 模块|auto-api|auto-complier|auto-inject
 ---|---|---|---
-最新版本  | 1.0.2 | 0.0.9 | 0.0.5
+最新版本  |   [![Download](https://api.bintray.com/packages/iyifei/maven/auto-api/images/download.svg)](https://bintray.com/iyifei/maven/auto-api/_latestVersion)  |  [![Download](https://api.bintray.com/packages/iyifei/maven/auto-complier/images/download.svg)](https://bintray.com/iyifei/maven/auto-complier/_latestVersion)  |  [![Download](https://api.bintray.com/packages/iyifei/maven/auto-inject/images/download.svg)](https://bintray.com/iyifei/maven/auto-inject/_latestVersion)
 
 > Android组件化超级路由，为简单而生。
 
@@ -10,6 +10,15 @@
 
 ## demo
 [demo apk 下载](https://github.com/yifei8/ARetrofit/raw/master/app-release.apk)
+
+## 更新日志
+#### version to 1.5.0     （2019-1-31）
+proguard 变化
+
+~~-keep class * implements com.sjtu.yifei.annotation.AutoRegisterContract{*;}~~
+
+```-keep class * implements com.sjtu.yifei.annotation.InjectContract{*;}```
+
 
 ## 一 介绍
 从命名来看，做Android开发的小伙伴们感觉是不是似曾相识…是的，Retrofit，一款优秀的网络框架，目前正在被大量使用，相信大家对它的用法已经非常熟悉吧。
