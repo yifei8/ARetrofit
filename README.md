@@ -149,7 +149,7 @@ private void launchTest1Activity(String para1, int para2) {
 ### step6：添加混淆规则(如果使用了Proguard)
 ```
 -keep class * implements com.sjtu.yifei.ioc.**{*;}
--keep class * implements com.sjtu.yifei.annotation.AutoRegisterContract{*;}
+-keep class * implements com.sjtu.yifei.annotation.InjectContract{*;}
 ```
 ## 三 支持ActivityCallback，告别onActivityResult,使得代码更加简洁灵活
 如登录回调
