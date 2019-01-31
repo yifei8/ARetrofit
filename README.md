@@ -27,6 +27,8 @@ ARetrofit一款优秀的Android组件化框架（皮一下^_^开心），可以�
 
 如果你正在对项目进行组件化，ARetrofit将是不二选择。
 
+## [框架原理](https://yifei8.github.io/ARetrofit/)
+
 ## 二 功能介绍
 - 新增ActivityCallback,通过配置一个参数实现Activity回调，且可以回传任意参数，告别onActivityResult繁琐写法，使用更灵活
 - 支持直接解析标准URL进行跳转
