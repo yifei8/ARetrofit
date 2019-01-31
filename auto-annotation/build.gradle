@@ -1,20 +1,7 @@
 apply plugin: 'java'
 
-ext {
-    bintrayName = 'auto-annotation'
-    artifact = bintrayName
-    libraryName = 'auto annotation contract'
-    libraryDescription = 'A lib for autoannotation'
-    libraryVersion = auto_annotation_version
-    localRepo = '../repo-annotation'
-}
-
 dependencies {
-    implementation gradleApi()
-    implementation localGroovy()
+    compile("com.sjtu.yifei:auto-inject:$auto_inject_version") {
+        transitive = false
+    }
 }
-
-//apply from: '../bintrayv1.gradle'
-//apply from: '../installv1.gradle'
-
-//apply from: '../bintray.gradle'
