@@ -3,8 +3,8 @@ package com.sjtu.yifei.route;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.sjtu.yifei.annotation.AutoRegisterContract;
 import com.sjtu.yifei.annotation.IMethod;
+import com.sjtu.yifei.annotation.InjectContract;
 import com.sjtu.yifei.ioc.AInterceptorInject;
 import com.sjtu.yifei.ioc.RouteInject;
 
@@ -24,7 +24,7 @@ import java.util.Map;
  * 修改备注：
  */
 
-public final class RouteRegister implements AutoRegisterContract {
+public final class RouteRegister implements InjectContract {
 
     private static final String TAG = "RouteRegister";
 
@@ -57,7 +57,7 @@ public final class RouteRegister implements AutoRegisterContract {
     }
 
     @Override
-    public void register(String className) {
+    public void injectClass(String className) {
         if (!TextUtils.isEmpty(className)) {
             try {
                 Class<?> clazz = Class.forName(className);

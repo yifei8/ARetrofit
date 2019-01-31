@@ -2,8 +2,11 @@
 
 buildscript {
     ext.kotlin_version = '1.2.10'
+    ext.auto_inject_version = '1.0.1'
     repositories {
-        maven { url rootProject.file("repo-api") }
+//        maven { url rootProject.file("repo-annotation") }
+//        maven { url rootProject.file("repo-api") }
+//        maven { url rootProject.file("repo-complier") }
         maven {
             //一般 Add to JCenter会有审核延迟, 此时还没有添加到Jcenter中
             //在未审核通过之前，可以这样使用自己的maven仓库：
@@ -18,10 +21,10 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "com.sjtu.yifei:auto-inject:$auto_inject_version"
 
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.2'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
-        classpath "com.sjtu.yifei:auto-inject:0.0.5"
         // NOTE: Do not place your application dependencieshere; they belong
         // in the individual module build.gradle files
     }
@@ -29,8 +32,8 @@ buildscript {
 
 allprojects {
     repositories {
-        maven { url rootProject.file("repo-api") }
 //        maven { url rootProject.file("repo-annotation") }
+//        maven { url rootProject.file("repo-api") }
 //        maven { url rootProject.file("repo-complier") }
         maven {
             //一般 Add to JCenter会有审核延迟, 此时还没有添加到Jcenter中
@@ -57,7 +60,7 @@ task clean(type: Delete) {
 }
 
 ext {
-    auto_api = "1.0.1"
-    auto_annotation = "0.0.8"
-    auto_complier = "0.0.9"
+    auto_annotation = "1.5.0"
+    auto_api = "1.5.0"
+    auto_complier = "1.5.0"
 }
