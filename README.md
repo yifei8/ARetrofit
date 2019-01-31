@@ -48,37 +48,51 @@ ARetrofit一款优秀的Android组件化框架（皮一下^_^开心），可以�
 
 ## 二 基本用法
 ### step1: 添加依赖和配置
- ``` gradle
-//module gradle file
-//kotlin 需要添加插件
-apply plugin: 'kotlin-kapt'
 
-dependencies {
-    ...
-    annotationProcessor "com.sjtu.yifei:auto-complier:0.0.9"
-    //kotlin使用kapt插件
-    kapt "com.sjtu.yifei:auto-complier:0.0.9"
-    api "com.sjtu.yifei:auto-api:1.0.2"
-}
-
-//project gradle file
+- project gradle file
+```
 buildscript {
     repositories {
         google()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
-        //Gradle 插件实现路由表的自动加载
-        classpath "com.sjtu.yifei:auto-inject:0.0.5"
+        classpath 'com.android.tools.build:gradle:x.x.x'
+        //自动注入插件
+        classpath "com.sjtu.yifei:auto-inject:1.0.1"
     }
 }
 
-// app gradle file
-apply plugin: 'com.android.application'
+```
+- app gradle file
+```
 //在plugin:'com.android.application'下添加以下插件，用于自动注入
 apply plugin: 'com.sjtu.yifei.autoinject'
 ```
+
+- lib module gradle file
+ ``` gradle
+dependencies {
+    ...
+    annotationProcessor "com.sjtu.yifei:auto-complier:1.5.0"
+
+    api "com.sjtu.yifei:auto-api:1.5.0"
+}
+ ```
+
+- kotlin lib module gradle file
+``` gradle
+apply plugin: 'kotlin-kapt' //kotlin 需要添加插件
+
+dependencies {
+    ...
+    //kotlin使用kapt插件
+    kapt "com.sjtu.yifei:auto-complier:1.5.0"
+
+    api "com.sjtu.yifei:auto-api:1.5.0"
+}
+ ```
+
 ### step2: 声明路由注解
 - Activity
 ```java
