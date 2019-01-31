@@ -2,7 +2,6 @@ package com.sjtu.yifei.processor;
 
 import com.sjtu.yifei.annotation.Inject;
 import com.sjtu.yifei.ioc.AInterceptorInject;
-import com.sjtu.yifei.ioc.RouteInject;
 import com.sjtu.yifei.utils.Logger;
 import com.squareup.javapoet.ClassName;
 import com.squareup.javapoet.JavaFile;
@@ -17,8 +16,6 @@ import java.util.Map;
 
 import javax.annotation.processing.Filer;
 import javax.lang.model.element.Modifier;
-
-import static com.squareup.javapoet.WildcardTypeName.subtypeOf;
 
 /**
  * 类描述：

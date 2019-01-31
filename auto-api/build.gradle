@@ -26,11 +26,14 @@ android {
 
 dependencies {
     annotationProcessor "com.sjtu.yifei:auto-complier:${rootProject.ext.auto_complier}"
-    compile "com.sjtu.yifei:auto-annotation:${rootProject.ext.auto_annotation}"
-    compile "com.android.support:support-v4:${SUPPORT_LIB_VERSION}"
+    implementation("com.sjtu.yifei:auto-inject:$auto_inject_version") {
+        transitive = false
+    }
+    implementation "com.sjtu.yifei:auto-annotation:${rootProject.ext.auto_annotation}"
+    implementation "com.android.support:support-v4:${SUPPORT_LIB_VERSION}"
 }
 
 //apply from: '../bintrayv1.gradle'
 //apply from: '../installv1.gradle'
 
-//apply from: '../bintray.gradle'
+apply from: '../bintray.gradle'

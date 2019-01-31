@@ -4,7 +4,6 @@ import com.sjtu.yifei.annotation.Inject;
 import com.sjtu.yifei.ioc.RouteInject;
 import com.sjtu.yifei.utils.Logger;
 import com.squareup.javapoet.ClassName;
-import com.squareup.javapoet.FieldSpec;
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.ParameterizedTypeName;
