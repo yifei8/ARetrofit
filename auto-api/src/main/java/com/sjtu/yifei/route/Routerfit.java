@@ -116,11 +116,11 @@ public final class Routerfit {
 
     private ServiceMethod<?> loadServiceMethod(Method method, Object[] args) throws ClassNotFoundException {
         ServiceMethod<?> result = serviceMethodCache.get(method);
-        if (result != null) return result;
+        if (result != null && result.args == args) return result;
 
         synchronized (serviceMethodCache) {
             result = serviceMethodCache.get(method);
-            if (result == null) {
+            if (result == null || result.args != args) {
                 result = new ServiceMethod.Builder(method, args).build();
                 serviceMethodCache.put(method, result);
             }

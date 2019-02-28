@@ -23,6 +23,7 @@ import java.util.Map;
 final class ServiceMethod<T> {
 
     final Class clazz;
+    final Object[] args;
     final Map<String, Object> params;
     final int flag;
     final int requestCode;
@@ -33,6 +34,7 @@ final class ServiceMethod<T> {
 
     ServiceMethod(Builder<T> builder) {
         this.clazz = builder.clazz;
+        this.args = builder.args;
         this.params = builder.params;
         this.requestCode = builder.requestCode;
         this.flag = builder.flag;
@@ -76,6 +78,12 @@ final class ServiceMethod<T> {
                 flag = flagInt.value();
             }
 
+            updateArgs();
+
+            return new ServiceMethod<T>(this);
+        }
+
+        private void updateArgs() {
             Annotation[][] parameterAnnotations = method.getParameterAnnotations();
             if (parameterAnnotations != null) {
                 params = new LinkedHashMap<>();
@@ -100,8 +108,6 @@ final class ServiceMethod<T> {
                     }
                 }
             }
-
-            return new ServiceMethod<T>(this);
         }
     }
 
