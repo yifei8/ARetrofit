@@ -19,8 +19,8 @@ proguard 变化
 
 ```-keep class * implements com.sjtu.yifei.annotation.InjectContract{*;}```
 
-#### auto-api version to 1.6.0   (2019-2-28)
-bugfix
+#### auto-api version to 1.7.0   (2019-2-28)
+缓存优化
 
 ## 一 介绍
 从命名来看，做Android开发的小伙伴们感觉是不是似曾相识…是的，Retrofit，一款优秀的网络框架，目前正在被大量使用，相信大家对它的用法已经非常熟悉吧。
@@ -79,7 +79,7 @@ dependencies {
     ...
     annotationProcessor "com.sjtu.yifei:auto-complier:1.5.0"
 
-    api "com.sjtu.yifei:auto-api:1.6.0"
+    api "com.sjtu.yifei:auto-api:1.7.0"
 }
  ```
 
@@ -92,7 +92,7 @@ dependencies {
     //kotlin使用kapt插件
     kapt "com.sjtu.yifei:auto-complier:1.5.0"
 
-    api "com.sjtu.yifei:auto-api:1.6.0"
+    api "com.sjtu.yifei:auto-api:1.7.0"
 }
  ```
 
