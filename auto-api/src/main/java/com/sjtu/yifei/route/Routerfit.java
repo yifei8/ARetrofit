@@ -2,6 +2,7 @@ package com.sjtu.yifei.route;
 
 import android.app.Activity;
 import android.app.Application;
+import android.os.Looper;
 import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -63,10 +64,14 @@ public final class Routerfit {
                 if (method.getDeclaringClass() == Object.class) {
                     return method.invoke(this, args);
                 }
+
                 ServiceMethod<Object> serviceMethod = (ServiceMethod<Object>) loadServiceMethod(method, args);
                 if (!TextUtils.isEmpty(serviceMethod.uristring)) {
                     Call<T> call = (Call<T>) new ActivityCall(serviceMethod);
                     return call.execute();
+                }
+                if (!isMainThread()) {
+                    throw new IllegalStateException("Must be called from main thread");
                 }
                 try {
                     if (serviceMethod.clazz == null) {
@@ -139,15 +144,23 @@ public final class Routerfit {
     }
 
     public static void setResult(@IntRange(from = -1, to = 0) int result, Object data) {
+        if (!isMainThread()) {
+            throw new IllegalStateException("Must be called from main thread");
+        }
         Activity activity = ActivityLifecycleMonitor.getTopActivity();
         if (activity != null) {
-            String key = activity.getLocalClassName();
-            if (ActivityLifecycleMonitor.getSecondLastActivity() != null) {
-                String lastActivityHash = String.valueOf(ActivityLifecycleMonitor.getSecondLastActivity().hashCode());
-                ActivityCallBackManager.getInstance().setResult(lastActivityHash + key, result, data);
+            String key = activity.getClass().getSimpleName();
+            Activity hashActivity = ActivityLifecycleMonitor.getSecondLastActivity();
+            if (hashActivity != null) {
+                String lastActivityHash = String.valueOf(hashActivity.hashCode());
+                String lastClassName = hashActivity.getClass().getSimpleName();
+                ActivityCallBackManager.getInstance().setResultDelayed(lastActivityHash + lastClassName + key, result, data);
             }
         }
     }
 
+    private static boolean isMainThread() {
+        return Looper.getMainLooper() == Looper.myLooper();
+    }
 
 }

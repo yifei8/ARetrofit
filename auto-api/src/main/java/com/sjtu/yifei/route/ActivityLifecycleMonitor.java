@@ -64,11 +64,13 @@ public final class ActivityLifecycleMonitor {
 
         @Override
         public void onActivityDestroyed(Activity activity) {
-            String key = activity.getLocalClassName();
+            String key = activity.getClass().getSimpleName();
             ACTIVITY_LIST.remove(activity);
             if (ACTIVITY_LIST.size() > 0) {
-                String lastActivityHash = String.valueOf(ACTIVITY_LIST.getLast().hashCode());
-                ActivityCallBackManager.getInstance().setResult(lastActivityHash + key, Routerfit.RESULT_CANCELED, "cancel");
+                Activity hashActivity = ACTIVITY_LIST.getLast();
+                String lastActivityHash = String.valueOf(hashActivity.hashCode());
+                String lastClassName = hashActivity.getClass().getSimpleName();
+                ActivityCallBackManager.getInstance().setResult(lastActivityHash + lastClassName + key, Routerfit.RESULT_CANCELED, "cancel");
             }
         }
     };

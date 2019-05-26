@@ -89,7 +89,7 @@ public class CallActivityAInterceptor implements AInterceptor {
                 intent.addFlags(serviceMethod.flag);
             }
             String lastActivityHash = String.valueOf(activity.hashCode());
-            ActivityCallBackManager.getInstance().putCallBack(lastActivityHash +  serviceMethod.clazz.getCanonicalName(), serviceMethod.callback);
+            ActivityCallBackManager.getInstance().putCallBack(lastActivityHash + activity.getClass().getSimpleName() + serviceMethod.clazz.getSimpleName(), serviceMethod.callback);
             if (serviceMethod.requestCode > 0) {
                 activity.startActivityForResult(intent, serviceMethod.requestCode);
             } else {
