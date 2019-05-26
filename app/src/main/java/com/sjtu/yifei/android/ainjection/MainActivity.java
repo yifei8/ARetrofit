@@ -3,9 +3,11 @@ package com.sjtu.yifei.android.ainjection;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.sjtu.yifei.route.ActivityCallback;
 import com.sjtu.yifei.route.RouteService;
 import com.sjtu.yifei.route.Routerfit;
 
@@ -55,5 +57,33 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
+    }
+
+    private void test() {
+        Routerfit.register(RouteService.class).launchLoginActivity(new ActivityCallback() {
+            @Override
+            public void onActivityResult(int i, Object o) {
+                if (i == Routerfit.RESULT_OK) {
+                    Log.d(TAG, "11111 data:" + o);
+                    test2();
+                } else {
+                    Log.e(TAG, "11111 cancel");
+                }
+            }
+        });
+    }
+
+    private void test2() {
+        Routerfit.register(RouteService.class)
+                .launchTest1Activity("Main Activity ", 100, new ActivityCallback() {
+                    @Override
+                    public void onActivityResult(int result, Object data) {
+                        if (result == Routerfit.RESULT_OK) {
+                            Log.d(TAG, "22222 data:" + data);
+                        } else {
+                            Log.e(TAG, "2222 cancel");
+                        }
+                    }
+                });
     }
 }
