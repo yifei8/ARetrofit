@@ -81,7 +81,7 @@ dependencies {
     ...
     annotationProcessor "com.sjtu.yifei:auto-complier:1.5.0"
 
-    api "com.sjtu.yifei:auto-api:1.7.0"
+    api "com.sjtu.yifei:auto-api:1.8.0"
 }
  ```
 
@@ -94,7 +94,7 @@ dependencies {
     //kotlin使用kapt插件
     kapt "com.sjtu.yifei:auto-complier:1.5.0"
 
-    api "com.sjtu.yifei:auto-api:1.7.0"
+    api "com.sjtu.yifei:auto-api:1.8.0"
 }
  ```
 
